@@ -17,8 +17,6 @@ Usage - training using YOLOv8:
 
 """
 
-import argparse
-
 import yolo8face_utils
 from yolo8face_utils import parse_args
 
