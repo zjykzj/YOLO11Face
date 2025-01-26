@@ -7,8 +7,8 @@
 @Description:
 
 Usage - eval using YOLOv5/YOLOv8:
-    $ python3 yolo8face_eval.py --model ./runs/yolov5nu_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --device 0
-    $ python3 yolo8face_eval.py --model ./runs/yolov8n_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --device 0
+    $ python3 yolo8face_eval.py --model ./runs/yolov5su_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --device 0
+    $ python3 yolo8face_eval.py --model ./runs/yolov8s_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --device 0
 
 """
 
