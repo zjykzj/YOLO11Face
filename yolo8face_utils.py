@@ -43,9 +43,17 @@ def parse_device(device_str):
             raise argparse.ArgumentTypeError("Device must be 'cpu' or a comma-separated list of integers.")
 
 
-def parse_args():
+def is_float(s):
+    try:
+        float(s)  # 直接尝试转换成float，因为int的字符串也可以成功转换
+        return True
+    except ValueError:
+        return False
+
+
+def parse_args(folder_pict=False):
     # 创建解析器
-    parser = argparse.ArgumentParser(description="YOLO8Face Training Script")
+    parser = argparse.ArgumentParser(description="YOLO8Face Script")
 
     # 添加参数
     parser.add_argument('--model', type=str, default="yolov8n.pt",
@@ -53,10 +61,14 @@ def parse_args():
     parser.add_argument('--data', type=str, default="./yolo8face/cfg/datasets/widerface.yaml",
                         help='Path to the data configuration (default: ./yolo8face/cfg/datasets/widerface.yaml)')
     parser.add_argument('--device', type=parse_device, default="cpu",
-                        help='Device ID for CUDA execution, -1 for CPU (default: cpu)')
+                        help='Device ID for CUDA execution, cpu for CPU (default: cpu)')
 
     parser.add_argument('--source', type=str, default=ASSETS,
                         help=f'Path to the source directory or file for prediction (default: {ASSETS})')
+
+    if folder_pict:
+        parser.add_argument('--folder_pict', default='../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt',
+                            type=str, help='folder_pict')
 
     # 解析已知和未知的参数
     args, unknown = parser.parse_known_args()
@@ -67,15 +79,27 @@ def parse_args():
         "model": args.model,
         "data": args.data,
         "device": args.device,
-        "source": args.source
+        "source": args.source,
     }
+    if folder_pict:
+        overrides["folder_pict"] = args.folder_pict
 
     # 处理额外的参数
     extra_args = {}
     for i in range(0, len(unknown), 2):
         key = unknown[i].replace('--', '')  # 去除 '--' 前缀
         value = unknown[i + 1]
-        extra_args[key] = int(value)
+        try:
+            if value.isdecimal():
+                extra_args[key] = int(value)
+            elif is_float(value):
+                extra_args[key] = float(value)
+            elif value.lower() == 'true':
+                extra_args[key] = True
+            elif value.lower() == 'false':
+                extra_args[key] = False
+        except ValueError:
+            extra_args[key] = value
 
     # 将额外的参数合并到 overrides
     overrides.update(extra_args)
