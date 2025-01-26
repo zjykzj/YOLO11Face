@@ -7,8 +7,8 @@
 @Description:
 
 Usage - predict using YOLOv5/YOLOv8:
-    $ python3 yolo8face_predict.py --model ./runs/yolov5nu_widerface.pt --source ./yolo8face/assets/widerface_val/ --device 0
-    $ python3 yolo8face_predict.py --model ./runs/yolov8s_widerface.pt --source ./yolo8face/assets/widerface_val/ --device 0
+    $ python3 yolo8face_predict.py --model yolov5nu_widerface.pt --source ./yolo8face/assets/widerface_val/ --device 0
+    $ python3 yolo8face_predict.py --model yolov8s_widerface.pt --source ./yolo8face/assets/widerface_val/ --device 0
 
 """
 
@@ -16,7 +16,6 @@ import yolo8face_utils
 from yolo8face_utils import parse_args
 
 from ultralytics.models.yolo.detect import DetectionPredictor
-
 
 
 def main():
