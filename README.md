@@ -122,4 +122,4 @@ Anyone's participation is welcome! Open an [issue](https://github.com/zjykzj/YOL
 
 ## License
 
-[Apache License 2.0](LICENSE) © 2024 zjykzj
+[Apache License 2.0](LICENSE) © 2025 zjykzj
