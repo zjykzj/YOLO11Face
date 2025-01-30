@@ -56,19 +56,18 @@ def parse_args(folder_pict=False):
     parser = argparse.ArgumentParser(description="YOLO8Face Script")
 
     # 添加参数
-    parser.add_argument('--model', type=str, default="yolov8n.pt",
+    parser.add_argument('--model', type=str, default=None,
                         help='Path to the model file (default: yolov8n.pt)')
-    parser.add_argument('--data', type=str, default="./yolo8face/cfg/datasets/widerface.yaml",
-                        help='Path to the data configuration (default: ./yolo8face/cfg/datasets/widerface.yaml)')
+    parser.add_argument('--data', type=str, default=None,
+                        help='Path to the data configuration')
     parser.add_argument('--device', type=parse_device, default="cpu",
                         help='Device ID for CUDA execution, cpu for CPU (default: cpu)')
 
-    parser.add_argument('--source', type=str, default=ASSETS,
+    parser.add_argument('--source', type=str, default=None,
                         help=f'Path to the source directory or file for prediction (default: {ASSETS})')
 
     if folder_pict:
-        parser.add_argument('--folder_pict', default='../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt',
-                            type=str, help='folder_pict')
+        parser.add_argument('--folder_pict', default=None, type=str, help='folder_pict')
 
     # 解析已知和未知的参数
     args, unknown = parser.parse_known_args()

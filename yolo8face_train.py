@@ -25,6 +25,8 @@ from ultralytics.models.yolo.detect import DetectionTrainer
 
 def main():
     overrides = parse_args()
+    assert overrides['model'] is not None, 'model must be specified'
+    assert overrides['data'] is not None, 'data must be specified'
     overrides['mode'] = 'train'
 
     # 初始化训练器并开始训练

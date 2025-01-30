@@ -20,6 +20,8 @@ from ultralytics.models.yolo.detect import DetectionPredictor
 
 def main():
     overrides = parse_args()
+    assert overrides['model'] is not None, 'model must be specified'
+    assert overrides['source'] is not None, 'source must be specified'
     overrides['mode'] = 'predict'
 
     # 初始化预测器并开始预测

@@ -7,7 +7,8 @@
 @Description:
 
 Usage - predict using YOLOv5/YOLOv8:
-    $ python widerface_detect.py --weights yolov8s_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --device 0 --conf 0.001 --iou 0.7 --max_det 300 --batch 1
+    $ python widerface_detect.py --model yolov8s_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --device 0
+    $ python widerface_detect.py --model yolov8s_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
 
 """
 import os
@@ -274,6 +275,10 @@ class WiderFacePredictor(DetectionPredictor):
 
 def main():
     overrides = parse_args(folder_pict=True)
+    assert overrides['model'] is not None, 'model must be specified'
+    assert overrides['source'] is not None, 'source must be specified'
+    assert overrides['folder_pict'] is not None, 'folder_pict must be specified'
+
     overrides['mode'] = 'predict'
     print(overrides)
     folder_pict = overrides['folder_pict']
