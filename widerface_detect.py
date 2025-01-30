@@ -7,7 +7,7 @@
 @Description:
 
 Usage - predict using YOLOv5/YOLOv8:
-    $ python widerface_detect.py --model yolov8s_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --device 0
+    $ python widerface_detect.py --model yolov5nu_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --device 0
     $ python widerface_detect.py --model yolov8s_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
 
 """
@@ -73,8 +73,11 @@ class WiderFaceResults(Results):
             # Detect/segment/pose
             for j, d in enumerate(boxes):
                 c, conf, id = int(d.cls), float(d.conf), None if d.id is None else int(d.id.item())
-                # line = (c, *(d.xyxyxyxyn.view(-1) if is_obb else d.xywhn.view(-1)))
-                line = (*(d.xywh.view(-1).int()), conf)
+                # [x1, y1, x2, y2] -> [x1, y1, w, h]
+                # line = (c, *(d.xyxy.view(-1) if is_obb else d.xywhn.view(-1)))
+                x1, y1, x2, y2 = d.xyxy.view(-1).int()
+                w, h = x2 - x1, y2 - y1
+                line = (x1, y1, w, h, conf)
                 if masks:
                     seg = masks[j].xyn[0].copy().reshape(-1)  # reversed mask.xyn, (n,2) to (n*2)
                     line = (c, *seg)
