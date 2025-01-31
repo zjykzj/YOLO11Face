@@ -15,6 +15,18 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
+|                      |     ARCH     | GFLOPs |   Easy    |  Medium   |   Hard    |
+|:--------------------:|:------------:|:------:|:---------:|:---------:|:---------:|
+| **zjykzj/YOLO5Face** | yolov5x-v7.0 |  204   | **95.79** | **94.53** | **87.63** |
+| **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  |   94.84   |   93.28   |   84.67   |
+| **zjykzj/YOLO5Face** | yolov5n-v7.0 |  4.2   |   93.25   |   91.11   |   80.33   |
+|                      |              |        |           |           |           |
+| **zjykzj/YOLO8Face** |   yolov5su   |  23.8  |   95.29   |   93.89   |   82.82   |
+| **zjykzj/YOLO8Face** |   yolov5nu   |  7.1   |   93.54   |   91.48   |   78.34   |
+|                      |              |        |           |           |           |
+| **zjykzj/YOLO8Face** |   yolov8s    |  28.4  |   95.19   |   93.92   |   82.99   |
+| **zjykzj/YOLO8Face** |   yolov8n    |  8.1   |   93.96   |   92.04   |   79.00   |
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
