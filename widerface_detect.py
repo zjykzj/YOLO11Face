@@ -6,7 +6,11 @@
 @Author  : zj
 @Description:
 
-Usage - predict using YOLOv5/YOLOv8:
+Usage - predict using YOLOv5:
+    $ python widerface_detect.py --model yolov5nu_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
+    $ python widerface_detect.py --model yolov8n_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
+
+Usage - predict using YOLOv5:
     $ python widerface_detect.py --model yolov8n_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
 
 """
@@ -285,8 +289,6 @@ def main():
     print(overrides)
     folder_pict = overrides['folder_pict']
     overrides.pop('folder_pict')
-
-    print(f"DEFAULT_CFG: {DEFAULT_CFG}")
 
     # 初始化预测器并开始预测
     predictor = WiderFacePredictor(overrides=overrides, folder_pict=folder_pict)

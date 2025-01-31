@@ -6,9 +6,15 @@
 @Author  : zj
 @Description:
 
-Usage - eval using YOLOv5/YOLOv8:
-    $ python3 yolo8face_eval.py --model ./runs/yolov5su_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --device 0
-    $ python3 yolo8face_eval.py --model ./runs/yolov8s_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --device 0
+Usage - eval using YOLOv5:
+    $ python3 yolo8face_eval.py --model yolov5nu_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
+    $ python3 yolo8face_eval.py --model yolov5su_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
+    $ python3 yolo8face_eval.py --model yolov5su_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 800 --device 0
+
+Usage - training using YOLOv8:
+    $ python3 yolo8face_train.py --model yolov8n_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
+    $ python3 yolo8face_train.py --model yolov8s_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
+    $ python3 yolo8face_train.py --model yolov8s_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 800 --device 0
 
 """
 
