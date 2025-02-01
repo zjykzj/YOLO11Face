@@ -26,12 +26,14 @@
 | **zjykzj/YOLO8Face** |   yolov8s    |  28.4  |   95.81   |   94.26   |   82.75   |
 | **zjykzj/YOLO8Face** |   yolov8n    |  8.1   |   93.96   |   92.04   |   79.00   |
 
+*Using VGA resolution input images (the longer edge of the input image is scaled to 640, and the shorter edge is scaled accordingly)*
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Background](#background)
+- [Installation](#installation)
 - [Usage](#usage)
-  - [Data](#data)
   - [Train](#train)
   - [Eval](#eval)
   - [Predict](#predict)
@@ -46,9 +48,11 @@ According to the [YOLO5Face](https://github.com/zjykzj/YOLO5Face) implementation
 
 Note: the latest implementation of YOLO8Face in our warehouse is entirely based on [ultralytics/ultralytics v8.2.103](https://github.com/ultralytics/ultralytics/releases/tag/v8.2.103)
 
-## Usage
+## Installation
 
-### Data
+See [INSTALL.md](./yolo8face/docs/INSTALL.md)
+
+## Usage  
 
 Download the WIDERFACE dataset from http://shuoyang1213.me/WIDERFACE/, Then convert WIDERFACE dataset format.
 
