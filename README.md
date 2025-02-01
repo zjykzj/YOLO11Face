@@ -107,6 +107,8 @@ Speed: 3.0ms preprocess, 8.5ms inference, 1.2ms postprocess per image at shape (
 Results saved to /data/zj/YOLO8Face/runs/detect/predict5
 ```
 
+<p align="left"><img src="yolo8face/assets/predict/9_Press_Conference_Press_Conference_9_632.jpg" height="240"\>  <img src="yolo8face/assets/predict/39_Ice_Skating_iceskiing_39_351.jpg" height="240"\></p>
+
 ## Maintainers
 
 * zhujian - *Initial work* - [zjykzj](https://github.com/zjykzj)
