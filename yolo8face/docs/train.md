@@ -35,6 +35,8 @@ Results saved to /data/zj/YOLO8Face/runs/detect/train3
 
 ### YOLOv8s
 
+* E100 + I640
+
 ```shell
 # python3 yolo8face_train.py --model yolov8s.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 100 --imgsz 640 --device 0
 ...
@@ -63,9 +65,42 @@ Speed: 0.2ms preprocess, 1.0ms inference, 0.0ms loss, 0.5ms postprocess per imag
 Results saved to /data/zj/YOLO8Face/runs/detect/train4
 ```
 
+* E300 + I800
+
+```shell
+# python3 yolo8face_train.py --model yolov8s.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --device 0 --batch 8
+...
+...
+...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    299/300      13.9G      0.915     0.4065     0.8607         58        800: 100%|██████████| 1610/1610 [02:44<00:00,  9.80
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:16<00:
+                   all       3225      39675      0.882      0.677      0.766      0.431
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    300/300      18.4G     0.9144      0.408     0.8605         30        800: 100%|██████████| 1610/1610 [02:44<00:00,  9.79
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:16<00:
+                   all       3225      39675      0.881      0.677      0.766      0.431
+
+300 epochs completed in 15.311 hours.
+Optimizer stripped from /data/zj/YOLO8Face/runs/detect/train2/weights/last.pt, 22.5MB
+Optimizer stripped from /data/zj/YOLO8Face/runs/detect/train2/weights/best.pt, 22.5MB
+
+Validating /data/zj/YOLO8Face/runs/detect/train2/weights/best.pt...
+Ultralytics YOLOv8.2.103 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:6 (NVIDIA GeForce RTX 3090, 24268MiB)
+Model summary (fused): 168 layers, 11,125,971 parameters, 0 gradients, 28.4 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:20<00:
+                   all       3225      39675      0.881       0.68      0.766      0.434
+Speed: 0.2ms preprocess, 1.8ms inference, 0.0ms loss, 0.6ms postprocess per image
+Results saved to /data/zj/YOLO8Face/runs/detect/train2
+```
+
 ## YOLOv5
 
 ### YOLOv5n
+
+* E100 + I640
 
 ```shell
 # python3 yolo8face_train.py --model yolov5nu.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 100 --imgsz 640 --device 0
@@ -95,7 +130,39 @@ Speed: 0.1ms preprocess, 0.5ms inference, 0.0ms loss, 0.5ms postprocess per imag
 Results saved to /data/zj/YOLO8Face/runs/detect/train
 ```
 
+* E300 + I800
+
+```shell
+# python3 yolo8face_train.py --model yolov5nu.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --device 0 --batch 8
+...
+...
+...
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    299/300      12.5G      1.214     0.5665     0.9363         58        800: 100%|██████████| 1610/1610 [02:56<00:00,  9.10
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:14<00:
+                   all       3225      39675      0.868      0.632       0.72        0.4
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    300/300        17G      1.217     0.5704     0.9367         30        800: 100%|██████████| 1610/1610 [02:56<00:00,  9.14
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:14<00:
+                   all       3225      39675      0.868      0.632       0.72      0.401
+
+300 epochs completed in 16.288 hours.
+Optimizer stripped from /data/zj/YOLO8Face/runs/detect/train3/weights/last.pt, 5.3MB
+Optimizer stripped from /data/zj/YOLO8Face/runs/detect/train3/weights/best.pt, 5.3MB
+
+Validating /data/zj/YOLO8Face/runs/detect/train3/weights/best.pt...
+Ultralytics YOLOv8.2.103 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:5 (NVIDIA GeForce RTX 3090, 24268MiB)
+YOLOv5n summary (fused): 193 layers, 2,503,139 parameters, 0 gradients, 7.1 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:17<00:
+                   all       3225      39675      0.867      0.632       0.72      0.401
+Speed: 0.2ms preprocess, 0.9ms inference, 0.0ms loss, 0.5ms postprocess per image
+Results saved to /data/zj/YOLO8Face/runs/detect/train3
+```
+
 ### YOLOv5s
+
+* E100 + I640
 
 ```shell
 # python3 yolo8face_train.py --model yolov5su.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 100 --imgsz 640 --device 0
@@ -124,4 +191,34 @@ YOLOv5s summary (fused): 193 layers, 9,111,923 parameters, 0 gradients, 23.8 GFL
                    all       3225      39675      0.865      0.627      0.712      0.397
 Speed: 0.2ms preprocess, 1.0ms inference, 0.0ms loss, 0.5ms postprocess per image
 Results saved to /data/zj/YOLO8Face/runs/detect/train2
+```
+
+* E300 + I800
+
+```shell
+# python3 yolo8face_train.py --model yolov5su.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --device 0 --batch 8
+...
+...
+...
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    299/300      13.8G     0.9745     0.4388     0.8703         58        800: 100%|██████████| 1610/1610 [02:55<00:00,  9.18
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:15<00:
+                   all       3225      39675       0.88      0.675      0.765       0.43
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+    300/300      18.4G     0.9732     0.4408     0.8701         30        800: 100%|██████████| 1610/1610 [02:52<00:00,  9.32
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:15<00:
+                   all       3225      39675      0.879      0.675      0.765       0.43
+
+300 epochs completed in 16.396 hours.
+Optimizer stripped from /data/zj/YOLO8Face/runs/detect/train/weights/last.pt, 18.5MB
+Optimizer stripped from /data/zj/YOLO8Face/runs/detect/train/weights/best.pt, 18.5MB
+
+Validating /data/zj/YOLO8Face/runs/detect/train/weights/best.pt...
+Ultralytics YOLOv8.2.103 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:7 (NVIDIA GeForce RTX 3090, 24268MiB)
+YOLOv5s summary (fused): 193 layers, 9,111,923 parameters, 0 gradients, 23.8 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 202/202 [00:19<00:
+                   all       3225      39675      0.882      0.674      0.764      0.431
+Speed: 0.2ms preprocess, 1.5ms inference, 0.0ms loss, 0.6ms postprocess per image
+Results saved to /data/zj/YOLO8Face/runs/detect/train
 ```
