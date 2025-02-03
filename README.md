@@ -33,6 +33,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [News🚀🚀🚀](#news)
 - [Background](#background)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -43,6 +44,12 @@
 - [Thanks](#thanks)
 - [Contributing](#contributing)
 - [License](#license)
+
+## News🚀🚀🚀
+
+| Version                                                           | Release Date | Major Updates                                                     |
+|-------------------------------------------------------------------|--------------|-------------------------------------------------------------------|
+| [v0.1.0](https://github.com/zjykzj/YOLO8Face/releases/tag/v0.1.0) | 2025/02/03   | Trains a face detector based on YOLOv8 and the WIDERFACE dataset. |
 
 ## Background
 
