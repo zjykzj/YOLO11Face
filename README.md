@@ -15,18 +15,20 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-|                      |     ARCH     | GFLOPs |   Easy    |  Medium   |   Hard    |
-|:--------------------:|:------------:|:------:|:---------:|:---------:|:---------:|
-| **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  |   94.84   |   93.28   |   84.67   |
-| **zjykzj/YOLO5Face** | yolov5n-v7.0 |  4.2   |   93.25   |   91.11   |   80.33   |
-|                      |              |        |           |           |           |
-| **zjykzj/YOLO8Face** |   yolov5su   |  23.8  |   95.29   |   93.89   |   82.82   |
-| **zjykzj/YOLO8Face** |   yolov5nu   |  7.1   |   93.54   |   91.48   |   78.34   |
-|                      |              |        |           |           |           |
-| **zjykzj/YOLO8Face** |   yolov8s    |  28.4  |   95.81   |   94.26   |   82.75   |
-| **zjykzj/YOLO8Face** |   yolov8n    |  8.1   |   93.96   |   92.04   |   79.00   |
+|                      |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
+|:--------------------:|:------------:|:------:|:-----:|:------:|:-----:|
+| **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  | 94.84 | 93.28  | 84.67 |
+| **zjykzj/YOLO5Face** | yolov5n-v7.0 |  4.2   | 93.25 | 91.11  | 80.33 |
+|                      |              |        |       |        |       |
+| **zjykzj/YOLO8Face** |   yolov5su   |  23.8  | 95.18 | 93.50  | 82.47 |
+| **zjykzj/YOLO8Face** |   yolov5nu   |  7.1   | 93.96 | 91.82  | 78.89 |
+|                      |              |        |       |        |       |
+| **zjykzj/YOLO8Face** |   yolov8s    |  28.4  | 95.81 | 94.26  | 82.75 |
+| **zjykzj/YOLO8Face** |   yolov8n    |  8.1   | 94.57 | 92.55  | 78.97 |
 
-*Using VGA resolution input images (the longer edge of the input image is scaled to 640, and the shorter edge is scaled accordingly)*
+*During the eval phase, using VGA resolution input images (the longer edge of the input image is scaled to 640, and the shorter edge is scaled accordingly)*
+
+*During the training phase, the longer edge of the input image is scaled to 800, and the shorter edge is scaled accordingly*
 
 ## Table of Contents
 
@@ -65,9 +67,9 @@ $ python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/w
 
 ```shell
 # YOLOv5s
-$ python3 yolo8face_train.py --model yolov5su.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --device 0
+$ python3 yolo8face_train.py --model yolov5su.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 # YOLOv8s
-$ python3 yolo8face_train.py --model yolov8s.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --device 0
+$ python3 yolo8face_train.py --model yolov8s.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 ```
 
 ### Eval
