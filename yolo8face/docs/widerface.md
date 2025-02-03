@@ -3,6 +3,8 @@
 
 ## YOLOv8
 
+* E100 + I640(TRAIN) + I640(EVAL)
+
 ```shell
 # python widerface_detect.py --model yolov8n_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
 args: Namespace(data=None, device=[0], folder_pict='../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', model='yolov8n_widerface.pt', source='../datasets/widerface/images/val/') - unknown: ['--save_txt', 'true', '--conf', '0.001', '--iou', '0.7', '--max_det', '300', '--batch', '1']
@@ -26,6 +28,34 @@ Processing hard: 100%|███████████████████�
 Easy   Val AP: 0.9396273205641539
 Medium Val AP: 0.9204178762213794
 Hard   Val AP: 0.7899744594529312
+=================================================
+```
+
+* E100 + I800(TRAIN) + I640(EVAL)
+
+```shell
+# python widerface_detect.py --model yolov8n_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
+args: Namespace(data=None, device=[0], folder_pict='../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', model='yolov8n_widerface.pt', source='../datasets/widerface/images/val/') - unknown: ['--save_txt', 'true', '--conf', '0.001', '--iou', '0.7', '--max_det', '300', '--batch', '1']
+{'model': 'yolov8n_widerface.pt', 'data': None, 'device': [0], 'source': '../datasets/widerface/images/val/', 'folder_pict':'../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', 'save_txt': True, 'conf': 0.001, 'iou': 0.7, 'max_det': 300, 'batch': 1, 'mode': 'predict'}
+3226
+
+Ultralytics YOLOv8.2.103 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:0 (NVIDIA GeForce RTX 3090, 24268MiB)
+Model summary (fused): 168 layers, 3,005,843 parameters, 0 gradients, 8.1 GFLOPs
+...
+...
+Speed: 2.1ms preprocess, 10.0ms inference, 1.1ms postprocess per image at shape (1, 3, 640, 448)
+Results saved to /data/zj/YOLO8Face/runs/detect/predict6
+0 label saved to /data/zj/YOLO8Face/runs/detect/predict6/labels
+# cd widerface_evaluate/
+# python3 evaluation.py -p ../runs/detect/predict6/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 100.61it/s]
+Processing easy: 100%|███████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.18it/s]
+Processing medium: 100%|█████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.21it/s]
+Processing hard: 100%|███████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.20it/s]
+==================== Results ====================
+Easy   Val AP: 0.9456631739221575
+Medium Val AP: 0.9254719983976804
+Hard   Val AP: 0.7897253268725467
 =================================================
 ```
 
