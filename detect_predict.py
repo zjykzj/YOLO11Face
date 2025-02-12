@@ -7,8 +7,8 @@
 @Description:
 
 Usage - predict using YOLOv5/YOLOv8:
-    $ python3 yolo8face_predict.py --model yolov5nu_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
-    $ python3 yolo8face_predict.py --model yolov8s_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
+    $ python3 detect_predict.py --model yolov5nu_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
+    $ python3 detect_predict.py --model yolov8s_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
 
 """
 

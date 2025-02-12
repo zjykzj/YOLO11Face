@@ -7,12 +7,12 @@
 @Description:
 
 Usage - training using YOLOv5:
-    $ python3 yolo8face_train.py --model yolov5nu.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
-    $ python3 yolo8face_train.py --model yolov5su.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
+    $ python3 detect_train.py --model yolov5nu.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
+    $ python3 detect_train.py --model yolov5su.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 
 Usage - training using YOLOv8:
-    $ python3 yolo8face_train.py --model yolov8n.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
-    $ python3 yolo8face_train.py --model yolov8s.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
+    $ python3 detect_train.py --model yolov8n.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
+    $ python3 detect_train.py --model yolov8s.pt --data ./yolo8face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 
 """
 
