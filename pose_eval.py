@@ -6,9 +6,13 @@
 @Author  : zj
 @Description:
 
-Usage - eval using YOLOv8-pose:
-    $ python3 pose_eval.py --model yolov8n-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --device 0
-    $ python3 pose_eval.py --model yolov8s-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --device 0
+Usage - eval using YOLOv8-pose using I640:
+    $ python3 pose_eval.py --model yolov8n-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --imgsz 640 --device 0
+    $ python3 pose_eval.py --model yolov8s-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --imgsz 640 --device 0
+
+Usage - eval using YOLOv8-pose using I800:
+    $ python3 pose_eval.py --model yolov8n-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --imgsz 800 --device 0
+    $ python3 pose_eval.py --model yolov8s-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --imgsz 800 --device 0
 
 """
 

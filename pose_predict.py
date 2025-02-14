@@ -7,8 +7,8 @@
 @Description:
 
 Usage - predict using YOLOv8-pose:
-    $ python3 pose_predict.py --model yolov8n-pose_widerface.pt --source ./yolo8face/assets/widerface_val/ --device 0
-    $ python3 pose_predict.py --model yolov8s-pose_widerface.pt --source ./yolo8face/assets/widerface_val/ --device 0
+    $ python3 pose_predict.py --model yolov8n-pose_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
+    $ python3 pose_predict.py --model yolov8s-pose_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
 
 """
 
