@@ -1,6 +1,9 @@
-# Ultralytics YOLO 🚀, AGPL-3.0 license
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+from types import SimpleNamespace
 
 from ultralytics.utils import LOGGER, RANK, SETTINGS, TESTS_RUNNING, ops
+from ultralytics.utils.metrics import ClassifyMetrics, DetMetrics, OBBMetrics, PoseMetrics, SegmentMetrics
 
 try:
     assert not TESTS_RUNNING  # do not log pytest
@@ -15,9 +18,12 @@ try:
     # Ensures certain logging functions only run for supported tasks
     COMET_SUPPORTED_TASKS = ["detect"]
 
-    # Names of plots created by YOLOv8 that are logged to Comet
-    EVALUATION_PLOT_NAMES = "F1_curve", "P_curve", "R_curve", "PR_curve", "confusion_matrix"
+    # Names of plots created by Ultralytics that are logged to Comet
+    CONFUSION_MATRIX_PLOT_NAMES = "confusion_matrix", "confusion_matrix_normalized"
+    EVALUATION_PLOT_NAMES = "F1_curve", "P_curve", "R_curve", "PR_curve"
     LABEL_PLOT_NAMES = "labels", "labels_correlogram"
+    SEGMENT_METRICS_PLOT_PREFIX = "Box", "Mask"
+    POSE_METRICS_PLOT_PREFIX = "Box", "Pose"
 
     _comet_image_prediction_count = 0
 
@@ -25,14 +31,24 @@ except (ImportError, AssertionError):
     comet_ml = None
 
 
-def _get_comet_mode():
+def _get_comet_mode() -> str:
     """Returns the mode of comet set in the environment variables, defaults to 'online' if not set."""
-    return os.getenv("COMET_MODE", "online")
+    comet_mode = os.getenv("COMET_MODE")
+    if comet_mode is not None:
+        LOGGER.warning(
+            "WARNING ⚠️ The COMET_MODE environment variable is deprecated. "
+            "Please use COMET_START_ONLINE to set the Comet experiment mode. "
+            "To start an offline Comet experiment, use 'export COMET_START_ONLINE=0'. "
+            "If COMET_START_ONLINE is not set or is set to '1', an online Comet experiment will be created."
+        )
+        return comet_mode
+
+    return "online"
 
 
 def _get_comet_model_name():
-    """Returns the model name for Comet from the environment variable 'COMET_MODEL_NAME' or defaults to 'YOLOv8'."""
-    return os.getenv("COMET_MODEL_NAME", "YOLOv8")
+    """Returns the model name for Comet from the environment variable COMET_MODEL_NAME or defaults to 'Ultralytics'."""
+    return os.getenv("COMET_MODEL_NAME", "Ultralytics")
 
 
 def _get_eval_batch_logging_interval():
@@ -61,22 +77,24 @@ def _should_log_image_predictions():
     return os.getenv("COMET_EVAL_LOG_IMAGE_PREDICTIONS", "true").lower() == "true"
 
 
-def _get_experiment_type(mode, project_name):
-    """Return an experiment based on mode and project name."""
-    if mode == "offline":
-        return comet_ml.OfflineExperiment(project_name=project_name)
+def _resume_or_create_experiment(args: SimpleNamespace) -> None:
+    """
+    Resumes CometML experiment or creates a new experiment based on args.
 
-    return comet_ml.Experiment(project_name=project_name)
-
-
-def _create_experiment(args):
-    """Ensures that the experiment object is only created in a single process during distributed training."""
+    Ensures that the experiment object is only created in a single process during distributed training.
+    """
     if RANK not in {-1, 0}:
         return
-    try:
+
+    # Set environment variable (if not set by the user) to configure the Comet experiment's online mode under the hood.
+    # IF COMET_START_ONLINE is set by the user it will override COMET_MODE value.
+    if os.getenv("COMET_START_ONLINE") is None:
         comet_mode = _get_comet_mode()
+        os.environ["COMET_START_ONLINE"] = "1" if comet_mode != "offline" else "0"
+
+    try:
         _project_name = os.getenv("COMET_PROJECT_NAME", args.project)
-        experiment = _get_experiment_type(comet_mode, _project_name)
+        experiment = comet_ml.start(project_name=_project_name)
         experiment.log_parameters(vars(args))
         experiment.log_others(
             {
@@ -86,7 +104,7 @@ def _create_experiment(args):
                 "max_image_predictions": _get_max_image_predictions_to_log(),
             }
         )
-        experiment.log_other("Created from", "yolov8")
+        experiment.log_other("Created from", "ultralytics")
 
     except Exception as e:
         LOGGER.warning(f"WARNING ⚠️ Comet installed but not initialized correctly, not logging this run. {e}")
@@ -110,7 +128,7 @@ def _fetch_trainer_metadata(trainer):
 
 def _scale_bounding_box_to_original_image_shape(box, resized_image_shape, original_image_shape, ratio_pad):
     """
-    YOLOv8 resizes images during training and the label values are normalized based on this resized shape.
+    YOLO resizes images during training and the label values are normalized based on this resized shape.
 
     This function rescales the bounding box labels to the original image shape.
     """
@@ -274,11 +292,31 @@ def _log_image_predictions(experiment, validator, curr_step):
 
 def _log_plots(experiment, trainer):
     """Logs evaluation plots and label plots for the experiment."""
-    plot_filenames = [trainer.save_dir / f"{plots}.png" for plots in EVALUATION_PLOT_NAMES]
-    _log_images(experiment, plot_filenames, None)
+    plot_filenames = None
+    if isinstance(trainer.validator.metrics, SegmentMetrics) and trainer.validator.metrics.task == "segment":
+        plot_filenames = [
+            trainer.save_dir / f"{prefix}{plots}.png"
+            for plots in EVALUATION_PLOT_NAMES
+            for prefix in SEGMENT_METRICS_PLOT_PREFIX
+        ]
+    elif isinstance(trainer.validator.metrics, PoseMetrics):
+        plot_filenames = [
+            trainer.save_dir / f"{prefix}{plots}.png"
+            for plots in EVALUATION_PLOT_NAMES
+            for prefix in POSE_METRICS_PLOT_PREFIX
+        ]
+    elif isinstance(trainer.validator.metrics, (DetMetrics, OBBMetrics)):
+        plot_filenames = [trainer.save_dir / f"{plots}.png" for plots in EVALUATION_PLOT_NAMES]
 
-    label_plot_filenames = [trainer.save_dir / f"{labels}.jpg" for labels in LABEL_PLOT_NAMES]
-    _log_images(experiment, label_plot_filenames, None)
+    if plot_filenames is not None:
+        _log_images(experiment, plot_filenames, None)
+
+    confusion_matrix_filenames = [trainer.save_dir / f"{plots}.png" for plots in CONFUSION_MATRIX_PLOT_NAMES]
+    _log_images(experiment, confusion_matrix_filenames, None)
+
+    if not isinstance(trainer.validator.metrics, ClassifyMetrics):
+        label_plot_filenames = [trainer.save_dir / f"{labels}.jpg" for labels in LABEL_PLOT_NAMES]
+        _log_images(experiment, label_plot_filenames, None)
 
 
 def _log_model(experiment, trainer):
@@ -289,15 +327,12 @@ def _log_model(experiment, trainer):
 
 def on_pretrain_routine_start(trainer):
     """Creates or resumes a CometML experiment at the start of a YOLO pre-training routine."""
-    experiment = comet_ml.get_global_experiment()
-    is_alive = getattr(experiment, "alive", False)
-    if not experiment or not is_alive:
-        _create_experiment(trainer.args)
+    _resume_or_create_experiment(trainer.args)
 
 
 def on_train_epoch_end(trainer):
     """Log metrics and save batch images at the end of training epochs."""
-    experiment = comet_ml.get_global_experiment()
+    experiment = comet_ml.get_running_experiment()
     if not experiment:
         return
 
@@ -307,13 +342,10 @@ def on_train_epoch_end(trainer):
 
     experiment.log_metrics(trainer.label_loss_items(trainer.tloss, prefix="train"), step=curr_step, epoch=curr_epoch)
 
-    if curr_epoch == 1:
-        _log_images(experiment, trainer.save_dir.glob("train_batch*.jpg"), curr_step)
-
 
 def on_fit_epoch_end(trainer):
     """Logs model assets at the end of each epoch."""
-    experiment = comet_ml.get_global_experiment()
+    experiment = comet_ml.get_running_experiment()
     if not experiment:
         return
 
@@ -341,7 +373,7 @@ def on_fit_epoch_end(trainer):
 
 def on_train_end(trainer):
     """Perform operations at the end of training."""
-    experiment = comet_ml.get_global_experiment()
+    experiment = comet_ml.get_running_experiment()
     if not experiment:
         return
 
@@ -356,6 +388,8 @@ def on_train_end(trainer):
 
     _log_confusion_matrix(experiment, trainer, curr_step, curr_epoch)
     _log_image_predictions(experiment, trainer.validator, curr_step)
+    _log_images(experiment, trainer.save_dir.glob("train_batch*.jpg"), curr_step)
+    _log_images(experiment, trainer.save_dir.glob("val_batch*.jpg"), curr_step)
     experiment.end()
 
     global _comet_image_prediction_count

@@ -1,12 +1,12 @@
 ---
 comments: true
-description: Learn how to install Ultralytics using pip, conda, or Docker. Follow our step-by-step guide for a seamless setup of YOLOv8 with thorough instructions.
-keywords: Ultralytics, YOLOv8, Install Ultralytics, pip, conda, Docker, GitHub, machine learning, object detection
+description: Learn how to install Ultralytics using pip, conda, or Docker. Follow our step-by-step guide for a seamless setup of YOLO with thorough instructions.
+keywords: Ultralytics, YOLO11, Install Ultralytics, pip, conda, Docker, GitHub, machine learning, object detection
 ---
 
 ## Install Ultralytics
 
-Ultralytics provides various installation methods including pip, conda, and Docker. Install YOLOv8 via the `ultralytics` pip package for the latest stable release or by cloning the [Ultralytics GitHub repository](https://github.com/ultralytics/ultralytics) for the most up-to-date version. Docker can be used to execute the package in an isolated container, avoiding local installation.
+Ultralytics provides various installation methods including pip, conda, and Docker. Install YOLO via the `ultralytics` pip package for the latest stable release or by cloning the [Ultralytics GitHub repository](https://github.com/ultralytics/ultralytics) for the most up-to-date version. Docker can be used to execute the package in an isolated container, avoiding local installation.
 
 <p align="center">
   <br>
@@ -28,7 +28,7 @@ Ultralytics provides various installation methods including pip, conda, and Dock
         Install the `ultralytics` package using pip, or update an existing installation by running `pip install -U ultralytics`. Visit the Python Package Index (PyPI) for more details on the `ultralytics` package: [https://pypi.org/project/ultralytics/](https://pypi.org/project/ultralytics/).
 
         [![PyPI - Version](https://img.shields.io/pypi/v/ultralytics?logo=pypi&logoColor=white)](https://pypi.org/project/ultralytics/)
-        [![Downloads](https://static.pepy.tech/badge/ultralytics)](https://pepy.tech/project/ultralytics)
+        [![Downloads](https://static.pepy.tech/badge/ultralytics)](https://www.pepy.tech/projects/ultralytics)
 
         ```bash
         # Install the ultralytics package from PyPI
@@ -151,7 +151,7 @@ See the `ultralytics` [pyproject.toml](https://github.com/ultralytics/ultralytic
 
 ## Use Ultralytics with CLI
 
-The Ultralytics command line interface (CLI) allows for simple single-line commands without the need for a Python environment. CLI requires no customization or Python code. You can simply run all tasks from the terminal with the `yolo` command. Check out the [CLI Guide](usage/cli.md) to learn more about using YOLOv8 from the command line.
+The Ultralytics command line interface (CLI) allows for simple single-line commands without the need for a Python environment. CLI requires no customization or Python code. You can simply run all tasks from the terminal with the `yolo` command. Check out the [CLI Guide](usage/cli.md) to learn more about using YOLO from the command line.
 
 !!! example
 
@@ -161,7 +161,6 @@ The Ultralytics command line interface (CLI) allows for simple single-line comma
         ```bash
         yolo TASK MODE ARGS
         ```
-
         - `TASK` (optional) is one of ([detect](tasks/detect.md), [segment](tasks/segment.md), [classify](tasks/classify.md), [pose](tasks/pose.md), [obb](tasks/obb.md))
         - `MODE` (required) is one of ([train](modes/train.md), [val](modes/val.md), [predict](modes/predict.md), [export](modes/export.md), [track](modes/track.md), [benchmark](modes/benchmark.md))
         - `ARGS` (optional) are `arg=value` pairs like `imgsz=640` that override defaults.
@@ -172,28 +171,70 @@ The Ultralytics command line interface (CLI) allows for simple single-line comma
 
         Train a detection model for 10 [epochs](https://www.ultralytics.com/glossary/epoch) with an initial learning_rate of 0.01
         ```bash
-        yolo train data=coco8.yaml model=yolov8n.pt epochs=10 lr0=0.01
+        yolo train data=coco8.yaml model=yolo11n.pt epochs=10 lr0=0.01
         ```
 
     === "Predict"
 
         Predict a YouTube video using a pretrained segmentation model at image size 320:
         ```bash
-        yolo predict model=yolov8n-seg.pt source='https://youtu.be/LNwODJXcvt4' imgsz=320
+        yolo predict model=yolo11n-seg.pt source='https://youtu.be/LNwODJXcvt4' imgsz=320
         ```
 
     === "Val"
 
         Val a pretrained detection model at batch-size 1 and image size 640:
         ```bash
-        yolo val model=yolov8n.pt data=coco8.yaml batch=1 imgsz=640
+        yolo val model=yolo11n.pt data=coco8.yaml batch=1 imgsz=640
         ```
 
     === "Export"
 
-        Export a YOLOv8n classification model to ONNX format at image size 224 by 128 (no TASK required)
+        Export a yolo11n classification model to ONNX format at image size 224 by 128 (no TASK required)
         ```bash
-        yolo export model=yolov8n-cls.pt format=onnx imgsz=224,128
+        yolo export model=yolo11n-cls.pt format=onnx imgsz=224,128
+        ```
+
+    === "Count"
+
+        Count the objects in a video or live stream using YOLO11.
+        ```bash
+        yolo solutions count show=True
+
+        yolo solutions count source="path/to/video/file.mp4"  # specify video file path
+        ```
+
+    === "Workout"
+
+        Monitor the workout exercises using YOLO11 pose model.
+        ```bash
+        yolo solutions workout show=True
+
+        yolo solutions workout source="path/to/video/file.mp4"  # specify video file path
+
+        # Use keypoints for ab-workouts
+        yolo solutions workout kpts=[5, 11, 13]     # left side
+        yolo solutions workout kpts=[6, 12, 14]     # right side
+        ```
+
+    === "Queue"
+
+        Use YOLO11 to count objects in a designated queue or region.
+        ```bash
+        yolo solutions queue show=True
+
+        yolo solutions queue source="path/to/video/file.mp4"  # specify video file path
+
+        yolo solutions queue region=[(20, 400), (1080, 400), (1080, 360), (20, 360)]    # configure queue coordinates
+        ```
+
+    === "Inference with Streamlit"
+
+        Perform object detection, instance segmentation or even pose estimation in web browser using Streamlit.
+        ```bash
+        yolo solutions inference
+
+        yolo solutions inference model="path/to/model.pt"   # use model fine-tuned with Ultralytics Python package
         ```
 
     === "Special"
@@ -206,24 +247,26 @@ The Ultralytics command line interface (CLI) allows for simple single-line comma
         yolo settings
         yolo copy-cfg
         yolo cfg
+        yolo solutions help
         ```
 
 !!! warning
 
     Arguments must be passed as `arg=val` pairs, split by an equals `=` sign and delimited by spaces between pairs. Do not use `--` argument prefixes or commas `,` between arguments.
 
-    - `yolo predict model=yolov8n.pt imgsz=640 conf=0.25`  ✅
-    - `yolo predict model yolov8n.pt imgsz 640 conf 0.25`  ❌ (missing `=`)
-    - `yolo predict model=yolov8n.pt, imgsz=640, conf=0.25`  ❌ (do not use `,`)
-    - `yolo predict --model yolov8n.pt --imgsz 640 --conf 0.25`  ❌ (do not use `--`)
+    - `yolo predict model=yolo11n.pt imgsz=640 conf=0.25`  ✅
+    - `yolo predict model yolo11n.pt imgsz 640 conf 0.25`  ❌ (missing `=`)
+    - `yolo predict model=yolo11n.pt, imgsz=640, conf=0.25`  ❌ (do not use `,`)
+    - `yolo predict --model yolo11n.pt --imgsz 640 --conf 0.25`  ❌ (do not use `--`)
+    - `yolo solution model=yolo11n.pt imgsz=640 conf=0.25` ❌ (use `solutions`, not `solution`)
 
 [CLI Guide](usage/cli.md){ .md-button }
 
 ## Use Ultralytics with Python
 
-YOLOv8's Python interface allows for seamless integration into your Python projects, making it easy to load, run, and process the model's output. Designed with simplicity and ease of use in mind, the Python interface enables users to quickly implement [object detection](https://www.ultralytics.com/glossary/object-detection), segmentation, and classification in their projects. This makes YOLOv8's Python interface an invaluable tool for anyone looking to incorporate these functionalities into their Python projects.
+YOLO's Python interface allows for seamless integration into your Python projects, making it easy to load, run, and process the model's output. Designed with simplicity and ease of use in mind, the Python interface enables users to quickly implement [object detection](https://www.ultralytics.com/glossary/object-detection), segmentation, and classification in their projects. This makes YOLO's Python interface an invaluable tool for anyone looking to incorporate these functionalities into their Python projects.
 
-For example, users can load a model, train it, evaluate its performance on a validation set, and even export it to ONNX format with just a few lines of code. Check out the [Python Guide](usage/python.md) to learn more about using YOLOv8 within your Python projects.
+For example, users can load a model, train it, evaluate its performance on a validation set, and even export it to ONNX format with just a few lines of code. Check out the [Python Guide](usage/python.md) to learn more about using YOLO within your Python projects.
 
 !!! example
 
@@ -231,10 +274,10 @@ For example, users can load a model, train it, evaluate its performance on a val
     from ultralytics import YOLO
 
     # Create a new YOLO model from scratch
-    model = YOLO("yolov8n.yaml")
+    model = YOLO("yolo11n.yaml")
 
     # Load a pretrained YOLO model (recommended for training)
-    model = YOLO("yolov8n.pt")
+    model = YOLO("yolo11n.pt")
 
     # Train the model using the 'coco8.yaml' dataset for 3 epochs
     results = model.train(data="coco8.yaml", epochs=3)
@@ -345,9 +388,9 @@ As you navigate through your projects or experiments, be sure to revisit these s
 
 ## FAQ
 
-### How do I install Ultralytics YOLOv8 using pip?
+### How do I install Ultralytics using pip?
 
-To install Ultralytics YOLOv8 with pip, execute the following command:
+To install Ultralytics with pip, execute the following command:
 
 ```bash
 pip install ultralytics
@@ -363,9 +406,9 @@ pip install git+https://github.com/ultralytics/ultralytics.git
 
 Make sure to have the Git command-line tool installed on your system.
 
-### Can I install Ultralytics YOLOv8 using conda?
+### Can I install Ultralytics YOLO using conda?
 
-Yes, you can install Ultralytics YOLOv8 using conda by running:
+Yes, you can install Ultralytics YOLO using conda by running:
 
 ```bash
 conda install -c conda-forge ultralytics
@@ -379,9 +422,9 @@ conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision pytorch-cu
 
 For more instructions, visit the [Conda quickstart guide](guides/conda-quickstart.md).
 
-### What are the advantages of using Docker to run Ultralytics YOLOv8?
+### What are the advantages of using Docker to run Ultralytics YOLO?
 
-Using Docker to run Ultralytics YOLOv8 provides an isolated and consistent environment, ensuring smooth performance across different systems. It also eliminates the complexity of local installation. Official Docker images from Ultralytics are available on [Docker Hub](https://hub.docker.com/r/ultralytics/ultralytics), with different variants tailored for GPU, CPU, ARM64, NVIDIA Jetson, and Conda environments. Below are the commands to pull and run the latest image:
+Using Docker to run Ultralytics YOLO provides an isolated and consistent environment, ensuring smooth performance across different systems. It also eliminates the complexity of local installation. Official Docker images from Ultralytics are available on [Docker Hub](https://hub.docker.com/r/ultralytics/ultralytics), with different variants tailored for GPU, CPU, ARM64, NVIDIA Jetson, and Conda environments. Below are the commands to pull and run the latest image:
 
 ```bash
 # Pull the latest ultralytics image from Docker Hub
@@ -410,9 +453,9 @@ pip install -e .
 
 This approach allows you to contribute to the project or experiment with the latest source code. For more details, visit the [Ultralytics GitHub repository](https://github.com/ultralytics/ultralytics).
 
-### Why should I use Ultralytics YOLOv8 CLI?
+### Why should I use Ultralytics YOLO CLI?
 
-The Ultralytics YOLOv8 command line interface (CLI) simplifies running object detection tasks without requiring Python code. You can execute single-line commands for tasks like training, validation, and prediction straight from your terminal. The basic syntax for `yolo` commands is:
+The Ultralytics YOLO command line interface (CLI) simplifies running object detection tasks without requiring Python code. You can execute single-line commands for tasks like training, validation, and prediction straight from your terminal. The basic syntax for `yolo` commands is:
 
 ```bash
 yolo TASK MODE ARGS
@@ -421,7 +464,7 @@ yolo TASK MODE ARGS
 For example, to train a detection model with specified parameters:
 
 ```bash
-yolo train data=coco8.yaml model=yolov8n.pt epochs=10 lr0=0.01
+yolo train data=coco8.yaml model=yolo11n.pt epochs=10 lr0=0.01
 ```
 
 Check out the full [CLI Guide](usage/cli.md) to explore more commands and usage examples.

@@ -6,7 +6,20 @@ keywords: Roboflow, Crack Segmentation Dataset, Ultralytics, transportation safe
 
 # Roboflow Universe Crack Segmentation Dataset
 
+<a href="https://colab.research.google.com/github/ultralytics/notebooks/blob/main/notebooks/how-to-train-ultralytics-yolo-on-crack-segmentation-dataset.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open Crack Segmentation Dataset In Colab"></a>
+
 The [Roboflow](https://roboflow.com/?ref=ultralytics) [Crack Segmentation Dataset](https://universe.roboflow.com/university-bswxt/crack-bphdr?ref=ultralytics) stands out as an extensive resource designed specifically for individuals involved in transportation and public safety studies. It is equally beneficial for those working on the development of self-driving car models or simply exploring [computer vision](https://www.ultralytics.com/glossary/computer-vision-cv) applications for recreational purposes.
+
+<p align="center">
+  <br>
+  <iframe loading="lazy" width="720" height="405" src="https://www.youtube.com/embed/C4mc40YKm-g"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+  <br>
+  <strong>Watch:</strong> Crack segmentation using Ultralytics YOLOv9
+</p>
 
 Comprising a total of 4029 static images captured from diverse road and wall scenarios, this dataset emerges as a valuable asset for tasks related to crack segmentation. Whether you are delving into the intricacies of transportation research or seeking to enhance the [accuracy](https://www.ultralytics.com/glossary/accuracy) of your self-driving car models, this dataset provides a rich and varied collection of images to support your endeavors.
 
@@ -34,7 +47,7 @@ A YAML (Yet Another Markup Language) file is employed to outline the configurati
 
 ## Usage
 
-To train Ultralytics YOLOv8n model on the Crack Segmentation dataset for 100 [epochs](https://www.ultralytics.com/glossary/epoch) with an image size of 640, you can use the following code snippets. For a comprehensive list of available arguments, refer to the model [Training](../../modes/train.md) page.
+To train Ultralytics YOLO11n model on the Crack Segmentation dataset for 100 [epochs](https://www.ultralytics.com/glossary/epoch) with an image size of 640, you can use the following code snippets. For a comprehensive list of available arguments, refer to the model [Training](../../modes/train.md) page.
 
 !!! example "Train Example"
 
@@ -44,7 +57,7 @@ To train Ultralytics YOLOv8n model on the Crack Segmentation dataset for 100 [ep
         from ultralytics import YOLO
 
         # Load a model
-        model = YOLO("yolov8n-seg.pt")  # load a pretrained model (recommended for training)
+        model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)
 
         # Train the model
         results = model.train(data="crack-seg.yaml", epochs=100, imgsz=640)
@@ -54,7 +67,7 @@ To train Ultralytics YOLOv8n model on the Crack Segmentation dataset for 100 [ep
 
         ```bash
         # Start training from a pretrained *.pt model
-        yolo segment train data=crack-seg.yaml model=yolov8n-seg.pt epochs=100 imgsz=640
+        yolo segment train data=crack-seg.yaml model=yolo11n-seg.pt epochs=100 imgsz=640
         ```
 
 ## Sample Data and Annotations
@@ -98,9 +111,9 @@ We would like to acknowledge the Roboflow team for creating and maintaining the 
 
 The [Roboflow Crack Segmentation Dataset](https://universe.roboflow.com/university-bswxt/crack-bphdr?ref=ultralytics) is a comprehensive collection of 4029 static images designed specifically for transportation and public safety studies. It is ideal for tasks such as self-driving car model development and infrastructure maintenance. The dataset includes training, testing, and validation sets, aiding in accurate crack detection and segmentation.
 
-### How do I train a model using the Crack Segmentation Dataset with Ultralytics YOLOv8?
+### How do I train a model using the Crack Segmentation Dataset with Ultralytics YOLO11?
 
-To train an Ultralytics YOLOv8 model on the Crack Segmentation dataset, use the following code snippets. Detailed instructions and further parameters can be found on the model [Training](../../modes/train.md) page.
+To train an Ultralytics YOLO11 model on the Crack Segmentation dataset, use the following code snippets. Detailed instructions and further parameters can be found on the model [Training](../../modes/train.md) page.
 
 !!! example "Train Example"
 
@@ -110,7 +123,7 @@ To train an Ultralytics YOLOv8 model on the Crack Segmentation dataset, use the 
         from ultralytics import YOLO
 
         # Load a model
-        model = YOLO("yolov8n-seg.pt")  # load a pretrained model (recommended for training)
+        model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)
 
         # Train the model
         results = model.train(data="crack-seg.yaml", epochs=100, imgsz=640)
@@ -120,7 +133,7 @@ To train an Ultralytics YOLOv8 model on the Crack Segmentation dataset, use the 
 
         ```bash
         # Start training from a pretrained *.pt model
-        yolo segment train data=crack-seg.yaml model=yolov8n-seg.pt epochs=100 imgsz=640
+        yolo segment train data=crack-seg.yaml model=yolo11n-seg.pt epochs=100 imgsz=640
         ```
 
 ### Why should I use the Crack Segmentation Dataset for my self-driving car project?

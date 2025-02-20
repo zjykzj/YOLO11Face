@@ -7,7 +7,7 @@ keywords: Ultralytics, YOLO, object detection, deep learning, machine learning, 
 # ROS (Robot Operating System) quickstart guide
 
 <p align="center"> <iframe src="https://player.vimeo.com/video/639236696?h=740f412ce5" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></p>
-<p align="center"><a href="https://vimeo.com/639236696">ROS Introduction (captioned)</a> from <a href="https://vimeo.com/osrfoundation">Open Robotics</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<p align="center"><a href="https://vimeo.com/639236696">ROS Introduction (captioned)</a> from <a href="https://vimeo.com/osrfoundation">Open Robotics</a> on <a href="https://vimeo.com/">Vimeo</a>.</p>
 
 ## What is ROS?
 
@@ -88,8 +88,8 @@ import rospy
 
 from ultralytics import YOLO
 
-detection_model = YOLO("yolov8m.pt")
-segmentation_model = YOLO("yolov8m-seg.pt")
+detection_model = YOLO("yolo11m.pt")
+segmentation_model = YOLO("yolo11m-seg.pt")
 rospy.init_node("ultralytics")
 time.sleep(1)
 ```
@@ -140,8 +140,8 @@ while True:
 
     from ultralytics import YOLO
 
-    detection_model = YOLO("yolov8m.pt")
-    segmentation_model = YOLO("yolov8m-seg.pt")
+    detection_model = YOLO("yolo11m.pt")
+    segmentation_model = YOLO("yolo11m-seg.pt")
     rospy.init_node("ultralytics")
     time.sleep(1)
 
@@ -200,7 +200,7 @@ from std_msgs.msg import String
 
 from ultralytics import YOLO
 
-detection_model = YOLO("yolov8m.pt")
+detection_model = YOLO("yolo11m.pt")
 rospy.init_node("ultralytics")
 time.sleep(1)
 classes_pub = rospy.Publisher("/ultralytics/detection/classes", String, queue_size=5)
@@ -260,7 +260,7 @@ from ultralytics import YOLO
 rospy.init_node("ultralytics")
 time.sleep(1)
 
-segmentation_model = YOLO("yolov8m-seg.pt")
+segmentation_model = YOLO("yolo11m-seg.pt")
 
 classes_pub = rospy.Publisher("/ultralytics/detection/distance", String, queue_size=5)
 ```
@@ -313,7 +313,7 @@ while True:
     rospy.init_node("ultralytics")
     time.sleep(1)
 
-    segmentation_model = YOLO("yolov8m-seg.pt")
+    segmentation_model = YOLO("yolo11m-seg.pt")
 
     classes_pub = rospy.Publisher("/ultralytics/detection/distance", String, queue_size=5)
 
@@ -384,7 +384,7 @@ from ultralytics import YOLO
 
 rospy.init_node("ultralytics")
 time.sleep(1)
-segmentation_model = YOLO("yolov8m-seg.pt")
+segmentation_model = YOLO("yolo11m-seg.pt")
 ```
 
 Create a function `pointcloud2_to_array`, which transforms a `sensor_msgs/PointCloud2` message into two numpy arrays. The `sensor_msgs/PointCloud2` messages contain `n` points based on the `width` and `height` of the acquired image. For instance, a `480 x 640` image will have `307,200` points. Each point includes three spatial coordinates (`xyz`) and the corresponding color in `RGB` format. These can be considered as two separate channels of information.
@@ -463,7 +463,7 @@ for index, class_id in enumerate(classes):
 
     rospy.init_node("ultralytics")
     time.sleep(1)
-    segmentation_model = YOLO("yolov8m-seg.pt")
+    segmentation_model = YOLO("yolo11m-seg.pt")
 
 
     def pointcloud2_to_array(pointcloud2: PointCloud2) -> tuple:
@@ -536,7 +536,7 @@ from sensor_msgs.msg import Image
 
 from ultralytics import YOLO
 
-detection_model = YOLO("yolov8m.pt")
+detection_model = YOLO("yolo11m.pt")
 rospy.init_node("ultralytics")
 det_image_pub = rospy.Publisher("/ultralytics/detection/image", Image, queue_size=5)
 
@@ -589,7 +589,7 @@ from sensor_msgs.msg import PointCloud2
 from ultralytics import YOLO
 
 rospy.init_node("ultralytics")
-segmentation_model = YOLO("yolov8m-seg.pt")
+segmentation_model = YOLO("yolo11m-seg.pt")
 
 
 def pointcloud2_to_array(pointcloud2):

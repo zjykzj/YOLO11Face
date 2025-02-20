@@ -1,4 +1,4 @@
-# Ultralytics YOLO 🚀, AGPL-3.0 license
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import torch
 import torch.nn as nn
@@ -189,8 +189,7 @@ class v8DetectionLoss:
             out = torch.zeros(batch_size, counts.max(), ne - 1, device=self.device)
             for j in range(batch_size):
                 matches = i == j
-                n = matches.sum()
-                if n:
+                if n := matches.sum():
                     out[j, :n] = targets[matches, 1:]
             out[..., 1:5] = xywh2xyxy(out[..., 1:5].mul_(scale_tensor))
         return out
@@ -228,8 +227,11 @@ class v8DetectionLoss:
 
         # Pboxes
         pred_bboxes = self.bbox_decode(anchor_points, pred_distri)  # xyxy, (b, h*w, 4)
+        # dfl_conf = pred_distri.view(batch_size, -1, 4, self.reg_max).detach().softmax(-1)
+        # dfl_conf = (dfl_conf.amax(-1).mean(-1) + dfl_conf.amax(-1).amin(-1)) / 2
 
         _, target_bboxes, target_scores, fg_mask, _ = self.assigner(
+            # pred_scores.detach().sigmoid() * 0.8 + dfl_conf.unsqueeze(-1) * 0.2,
             pred_scores.detach().sigmoid(),
             (pred_bboxes.detach() * stride_tensor).type(gt_bboxes.dtype),
             anchor_points * stride_tensor,
@@ -295,7 +297,7 @@ class v8SegmentationLoss(v8DetectionLoss):
             raise TypeError(
                 "ERROR ❌ segment dataset incorrectly formatted or not a segment dataset.\n"
                 "This error can occur when incorrectly training a 'segment' model on a 'detect' dataset, "
-                "i.e. 'yolo train model=yolov8n-seg.pt data=coco8.yaml'.\nVerify your dataset is a "
+                "i.e. 'yolo train model=yolo11n-seg.pt data=coco8.yaml'.\nVerify your dataset is a "
                 "correctly formatted 'segment' dataset using 'data=coco8-seg.yaml' "
                 "as an example.\nSee https://docs.ultralytics.com/datasets/segment/ for help."
             ) from e
@@ -549,9 +551,8 @@ class v8PoseLoss(v8DetectionLoss):
             pred_kpts (torch.Tensor): Predicted keypoints, shape (BS, N_anchors, N_kpts_per_object, kpts_dim).
 
         Returns:
-            (tuple): Returns a tuple containing:
-                - kpts_loss (torch.Tensor): The keypoints loss.
-                - kpts_obj_loss (torch.Tensor): The keypoints object loss.
+            kpts_loss (torch.Tensor): The keypoints loss.
+            kpts_obj_loss (torch.Tensor): The keypoints object loss.
         """
         batch_idx = batch_idx.flatten()
         batch_size = len(masks)
@@ -602,6 +603,7 @@ class v8ClassificationLoss:
 
     def __call__(self, preds, batch):
         """Compute the classification loss between predictions and true labels."""
+        preds = preds[1] if isinstance(preds, (list, tuple)) else preds
         loss = F.cross_entropy(preds, batch["cls"], reduction="mean")
         loss_items = loss.detach()
         return loss, loss_items
@@ -627,8 +629,7 @@ class v8OBBLoss(v8DetectionLoss):
             out = torch.zeros(batch_size, counts.max(), 6, device=self.device)
             for j in range(batch_size):
                 matches = i == j
-                n = matches.sum()
-                if n:
+                if n := matches.sum():
                     bboxes = targets[matches, 2:]
                     bboxes[..., :4].mul_(scale_tensor)
                     out[j, :n] = torch.cat([targets[matches, 1:2], bboxes], dim=-1)
@@ -665,7 +666,7 @@ class v8OBBLoss(v8DetectionLoss):
             raise TypeError(
                 "ERROR ❌ OBB dataset incorrectly formatted or not a OBB dataset.\n"
                 "This error can occur when incorrectly training a 'OBB' model on a 'detect' dataset, "
-                "i.e. 'yolo train model=yolov8n-obb.pt data=dota8.yaml'.\nVerify your dataset is a "
+                "i.e. 'yolo train model=yolo11n-obb.pt data=dota8.yaml'.\nVerify your dataset is a "
                 "correctly formatted 'OBB' dataset using 'data=dota8.yaml' "
                 "as an example.\nSee https://docs.ultralytics.com/datasets/obb/ for help."
             ) from e
