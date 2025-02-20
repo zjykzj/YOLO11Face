@@ -4,10 +4,10 @@
   <a title="Chinese" href="./README.zh-CN.md">🇨🇳</a>
 </div> -->
 
-<div align="center"><a title="" href="https://github.com/zjykzj/YOLO8Face"><img align="center" src="yolo8face/assets/logo/YOLO8Face.png" alt=""></a></div>
+<div align="center"><a title="" href="https://github.com/zjykzj/YOLO11Face"><img align="center" src="yolo11face/assets/logo/YOLO8Face.svg" alt=""></a></div>
 
 <p align="center">
-  «YOLO8Face» combined YOLO5Face and YOLOv8 for face and keypoint detection
+  «YOLO8Face» combined YOLO5Face and YOLOv8/YOLO11 for face and keypoint detection
 <br>
 <br>
   <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square" alt=""></a>
@@ -35,12 +35,6 @@
 
 - [Table of Contents](#table-of-contents)
 - [News🚀🚀🚀](#news)
-- [Background](#background)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Train](#train)
-  - [Eval](#eval)
-  - [Predict](#predict)
 - [Maintainers](#maintainers)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
@@ -53,15 +47,15 @@
 | [v0.2.0](https://github.com/zjykzj/YOLO8Face/releases/tag/v0.2.0) | 2025/02/03   | Trains a face and landmarks detector based on `YOLOv8-pose` and the WIDERFACE dataset. |
 | [v0.1.0](https://github.com/zjykzj/YOLO8Face/releases/tag/v0.1.0) | 2025/02/03   | Trains a face detector based on `YOLOv8` and the WIDERFACE dataset.                    |
 
-## Background
+<!-- ## Background
 
 According to the [YOLO5Face](https://github.com/zjykzj/YOLO5Face) implementation, it adds Landmarks-HEAD to YOLOv5 to achieve synchronous detection of faces and keypoints. The YOLOv8 is an upgraded version of YOLOv5, which naturally improves the performance of face and keypoint detection by combining YOLO5Face and YOLOv8.
 
 Through experiments, it was found that using `YOLOv8-pose` can simultaneously detect faces and facial keypoints. Using the facial and keypoint datasets provided by RetinaFace, only the training dataset was used. Validation/training was split into 2:8 parts, and the facial and keypoint detectors were trained from scratch. Finally, they were evaluated on the WIDERFACE val dataset.
 
-Note: the latest implementation of YOLO8Face in our warehouse is entirely based on [ultralytics/ultralytics v8.2.103](https://github.com/ultralytics/ultralytics/releases/tag/v8.2.103)
+Note: the latest implementation of YOLO8Face in our warehouse is entirely based on [ultralytics/ultralytics v8.3.75](https://github.com/ultralytics/ultralytics/releases/tag/v8.3.75) -->
 
-## Installation
+<!-- ## Installation
 
 See [INSTALL.md](./yolo8face/docs/INSTALL.md)
 
@@ -123,7 +117,7 @@ Speed: 3.7ms preprocess, 10.0ms inference, 1.5ms postprocess per image at shape 
 Results saved to /data/zj/YOLO8Face/runs/detect/predict4
 ```
 
-<p align="left"><img src="yolo8face/assets/predict/9_Press_Conference_Press_Conference_9_632.jpg" height="240"\>  <img src="yolo8face/assets/predict/39_Ice_Skating_iceskiing_39_351.jpg" height="240"\></p>
+<p align="left"><img src="yolo8face/assets/predict/9_Press_Conference_Press_Conference_9_632.jpg" height="240"\>  <img src="yolo8face/assets/predict/39_Ice_Skating_iceskiing_39_351.jpg" height="240"\></p> -->
 
 ## Maintainers
 
@@ -137,7 +131,7 @@ Results saved to /data/zj/YOLO8Face/runs/detect/predict4
 
 ## Contributing
 
-Anyone's participation is welcome! Open an [issue](https://github.com/zjykzj/YOLO8Face/issues) or submit PRs.
+Anyone's participation is welcome! Open an [issue](https://github.com/zjykzj/YOLO11Face/issues) or submit PRs.
 
 ## License
 
