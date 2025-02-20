@@ -4,7 +4,7 @@
   <a title="Chinese" href="./README.zh-CN.md">🇨🇳</a>
 </div> -->
 
-<div align="center"><a title="" href="https://github.com/zjykzj/YOLO11Face"><img align="center" src="yolo11face/assets/logo/YOLO11Face.svg" alt=""></a></div>
+<div align="center"><a title="" href="https://github.com/zjykzj/YOLO11Face"><img align="center" src="yolo11face/assets/logo/YOLO11Face.png" alt=""></a></div>
 
 <p align="center">
   «YOLO11Face» combined YOLO5Face and YOLOv8/YOLO11 for face and keypoint detection
