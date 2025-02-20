@@ -4,10 +4,10 @@
   <a title="Chinese" href="./README.zh-CN.md">🇨🇳</a>
 </div> -->
 
-<div align="center"><a title="" href="https://github.com/zjykzj/YOLO11Face"><img align="center" src="yolo11face/assets/logo/YOLO8Face.svg" alt=""></a></div>
+<div align="center"><a title="" href="https://github.com/zjykzj/YOLO11Face"><img align="center" src="yolo11face/assets/logo/YOLO11Face.svg" alt=""></a></div>
 
 <p align="center">
-  «YOLO8Face» combined YOLO5Face and YOLOv8/YOLO11 for face and keypoint detection
+  «YOLO11Face» combined YOLO5Face and YOLOv8/YOLO11 for face and keypoint detection
 <br>
 <br>
   <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square" alt=""></a>
