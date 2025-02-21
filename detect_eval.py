@@ -6,13 +6,13 @@
 @Author  : zj
 @Description:
 
-Usage - eval using YOLOv5:
-    $ python3 detect_eval.py --model yolov5nu_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
-    $ python3 detect_eval.py --model yolov5su_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
-
-Usage - training using YOLOv8:
-    $ python3 detect_eval.py --model yolov8n_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
-    $ python3 detect_eval.py --model yolov8s_widerface.pt --data ./yolo8face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
+Usage - eval using YOLOv5/YOLOv8/YOLO11:
+    $ python3 detect_eval.py --model yolov5nu_widerface.pt
+                                     yolov5su_widerface.pt
+                                     yolov8n_widerface.pt
+                                     yolov8s_widerface.pt
+                                     yolo11n_widerface.pt
+                                     yolo11s_widerface.pt --data ./yolo11face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
 
 """
 

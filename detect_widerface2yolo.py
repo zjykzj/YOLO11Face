@@ -10,6 +10,37 @@ Usage - Convert the WIDERFACE dataset format to YOLO:
     $ python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
     $ python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
 
+The original dataset format is as follows:
+
+```text
+├── WIDER_train
+│   └── images
+        ├── 0--Parade
+        ├── 10--People_Marching
+        ├── 11--Meeting
+        ├── 12--Group
+        ├── 13--Interview
+        ├── 14--Traffic
+        ├── ...
+        ├── ...
+├── WIDER_val
+│   └── images
+├── wider_face_split
+│   ├── wider_face_train_bbx_gt.txt
+│   ├── wider_face_val_bbx_gt.txt
+```
+
+After processing, the data format is as follows:
+
+```text
+├── images
+│   ├── train
+│   └── val
+├── labels
+│   ├── train
+│   ├── val
+```
+
 """
 
 import os
@@ -102,11 +133,11 @@ def main():
         bounding_boxes = result["bounding_boxes"]
         for box in bounding_boxes:
             x1, y1, box_w, box_h = box
-            x_c = 1.0 * (x1 + box_w / 2) / width
-            y_c = 1.0 * (y1 + box_h / 2) / height
-            box_w = 1.0 * box_w / width
-            box_h = 1.0 * box_h / height
-            labels.append([cls_id, x_c, y_c, box_w, box_h])
+            x_c = format(1.0 * (x1 + box_w / 2) / width, ".6f")
+            y_c = format(1.0 * (y1 + box_h / 2) / height, ".6f")
+            box_w = format(1.0 * box_w / width, ".6f")
+            box_h = format(1.0 * box_h / height, ".6f")
+            labels.append([int(cls_id), x_c, y_c, box_w, box_h])
 
         image_name = os.path.basename(image_path)
         dst_img_path = os.path.join(dst_img_root, image_name)
