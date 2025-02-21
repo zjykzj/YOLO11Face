@@ -24,7 +24,7 @@ ultralytics.settings = settings
 import argparse
 
 # 预定义的ASSETS路径
-ASSETS = "./yolo8face/assets"
+ASSETS = "./yolo11face/assets"
 
 
 def parse_device(device_str):
@@ -53,11 +53,11 @@ def is_float(s):
 
 def parse_args(folder_pict=False):
     # 创建解析器
-    parser = argparse.ArgumentParser(description="YOLO8Face Script")
+    parser = argparse.ArgumentParser(description="YOLO11Face Script")
 
     # 添加参数
     parser.add_argument('--model', type=str, default=None,
-                        help='Path to the model file (default: yolov8n.pt)')
+                        help='Path to the model file (default: yolo11n.pt)')
     parser.add_argument('--data', type=str, default=None,
                         help='Path to the data configuration')
     parser.add_argument('--device', type=parse_device, default="cpu",
