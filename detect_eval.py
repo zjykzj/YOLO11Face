@@ -12,7 +12,8 @@ Usage - eval using YOLOv5/YOLOv8/YOLO11:
                                      yolov8n_widerface.pt
                                      yolov8s_widerface.pt
                                      yolo11n_widerface.pt
-                                     yolo11s_widerface.pt --data ./yolo11face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
+                                     yolo11s_widerface.pt --data ./yolo11face/cfg/datasets/widerface.yaml --imgsz 640
+                                                                                                                  800 --device 0
 
 """
 

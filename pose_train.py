@@ -6,9 +6,11 @@
 @Author  : zj
 @Description:
 
-Usage - training using YOLOv8-pose:
-    $ python3 pose_train.py --model yolov8n-pose.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --epochs 100 --imgsz 640 --device 0
-    $ python3 pose_train.py --model yolov8s-pose.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --epochs 100 --imgsz 640 --device 0
+Usage - training using YOLOv8-pose / YOLO11-pose:
+    $ python3 pose_train.py --model yolov8n-pose.pt
+                                    yolov8s-pose.pt
+                                    yolo11n-pose.pt
+                                    yolo11s-pose.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 
 """
 

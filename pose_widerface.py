@@ -7,8 +7,10 @@
 @Description:
 
 Usage - predict using YOLOv8-pose:
-    $ python pose_widerface.py --model yolov8n-pose_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --imgsz 640  --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
-    $ python pose_widerface.py --model yolov8s-pose_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --imgsz 640 --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
+    $ python pose_widerface.py --model yolov8n-pose_widerface.pt
+                                       yolov8s-pose_widerface.pt
+                                       yolo11n-pose_widerface.pt
+                                       yolo11s-pose_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --imgsz 640 --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
 
 """
 import os
