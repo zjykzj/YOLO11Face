@@ -18,9 +18,9 @@ import torch
 
 from pathlib import Path
 
-import yolo8face_utils
+import yolo11face_utils
 from ultralytics.utils import DEFAULT_CFG, LOGGER, ops, colorstr
-from yolo8face_utils import parse_args
+from yolo11face_utils import parse_args
 
 from ultralytics.engine.results import Results
 from ultralytics.models.yolo.pose import PosePredictor

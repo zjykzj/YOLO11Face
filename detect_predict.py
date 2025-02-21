@@ -12,8 +12,8 @@ Usage - predict using YOLOv5/YOLOv8:
 
 """
 
-import yolo8face_utils
-from yolo8face_utils import parse_args
+import yolo11face_utils
+from yolo11face_utils import parse_args
 
 from ultralytics.models.yolo.detect import DetectionPredictor
 
