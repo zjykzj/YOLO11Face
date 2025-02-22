@@ -35,6 +35,7 @@
 
 - [Table of Contents](#table-of-contents)
 - [News🚀🚀🚀](#news)
+- [Background](#background)
 - [Maintainers](#maintainers)
 - [Thanks](#thanks)
 - [Contributing](#contributing)
@@ -42,18 +43,18 @@
 
 ## News🚀🚀🚀
 
-| Version                                                           | Release Date | Major Updates                                                                        |
-|-------------------------------------------------------------------|--------------|--------------------------------------------------------------------------------------|
-| [v0.2.0](https://github.com/zjykzj/YOLO8Face/releases/tag/v0.2.0) | 2025/02/03   | Trains a face and landmarks detector based on `YOLOv8-pose` and the WIDERFACE dataset. |
-| [v0.1.0](https://github.com/zjykzj/YOLO8Face/releases/tag/v0.1.0) | 2025/02/03   | Trains a face detector based on `YOLOv8` and the WIDERFACE dataset.                    |
+* **2025/02/21**: Upgrade the baseline version of the repository to `ultralytics v8.3.75`.
+* **2025/02/15**: Trains a face and landmarks detector based on `YOLOv8-pose` and the WIDERFACE dataset.
+* **2023/02/03**: Trains a face detector based on `YOLOv8` and the WIDERFACE dataset.
+* **2025/01/09**: Initialize this repository using `ultralytics v8.2.103`.
 
-<!-- ## Background
+## Background
 
-According to the [YOLO5Face](https://github.com/zjykzj/YOLO5Face) implementation, it adds Landmarks-HEAD to YOLOv5 to achieve synchronous detection of faces and keypoints. The YOLOv8 is an upgraded version of YOLOv5, which naturally improves the performance of face and keypoint detection by combining YOLO5Face and YOLOv8.
+According to the [YOLO5Face](https://github.com/zjykzj/YOLO5Face) implementation, it adds `Landmarks-HEAD` to `YOLOv5` to achieve synchronous detection of faces and keypoints. The `YOLOv8/YOLO11` is an upgraded version of YOLOv5, which naturally improves the performance of face and keypoint detection by combining `YOLO5Face` and `YOLOv8/YOLO11`.
 
-Through experiments, it was found that using `YOLOv8-pose` can simultaneously detect faces and facial keypoints. Using the facial and keypoint datasets provided by RetinaFace, only the training dataset was used. Validation/training was split into 2:8 parts, and the facial and keypoint detectors were trained from scratch. Finally, they were evaluated on the WIDERFACE val dataset.
+Through experiments, it was found that using `YOLOv8-pose/YOLO11-pose` can simultaneously detect faces and facial keypoints. Thank to ultralytics !!!
 
-Note: the latest implementation of YOLO8Face in our warehouse is entirely based on [ultralytics/ultralytics v8.3.75](https://github.com/ultralytics/ultralytics/releases/tag/v8.3.75) -->
+Note: the latest implementation of `YOLO11Face` in our warehouse is entirely based on [ultralytics/ultralytics v8.3.75](https://github.com/ultralytics/ultralytics/releases/tag/v8.3.75)
 
 <!-- ## Installation
 
