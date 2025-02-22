@@ -31,24 +31,24 @@
 
 *During the eval phase, using VGA resolution input images (the longer edge of the input image is scaled to 640, and the shorter edge is scaled accordingly)*
 
-## Table of Contents
+## ✨Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [News🚀🚀🚀](#news)
-- [Background](#background)
-- [Maintainers](#maintainers)
-- [Thanks](#thanks)
-- [Contributing](#contributing)
-- [License](#license)
+- [✨Table of Contents](#table-of-contents)
+- [🚀News](#news)
+- [🏷️Background](#️background)
+- [🔥Maintainers](#maintainers)
+- [♥️Thanks](#️thanks)
+- [🌞Contributing](#contributing)
+- [✒️License](#️license)
 
-## News🚀🚀🚀
+## 🚀News
 
 * **2025/02/21**: Upgrade the baseline version of the repository to `ultralytics v8.3.75`.
 * **2025/02/15**: Trains a face and landmarks detector based on `YOLOv8-pose` and the WIDERFACE dataset.
 * **2023/02/03**: Trains a face detector based on `YOLOv8` and the WIDERFACE dataset.
 * **2025/01/09**: Initialize this repository using `ultralytics v8.2.103`.
 
-## Background
+## 🏷️Background
 
 According to the [YOLO5Face](https://github.com/zjykzj/YOLO5Face) implementation, it adds `Landmarks-HEAD` to `YOLOv5` to achieve synchronous detection of faces and keypoints. The `YOLOv8/YOLO11` is an upgraded version of YOLOv5, which naturally improves the performance of face and keypoint detection by combining `YOLO5Face` and `YOLOv8/YOLO11`.
 
@@ -120,20 +120,20 @@ Results saved to /data/zj/YOLO8Face/runs/detect/predict4
 
 <p align="left"><img src="yolo8face/assets/predict/9_Press_Conference_Press_Conference_9_632.jpg" height="240"\>  <img src="yolo8face/assets/predict/39_Ice_Skating_iceskiing_39_351.jpg" height="240"\></p> -->
 
-## Maintainers
+## 🔥Maintainers
 
 * zhujian - *Initial work* - [zjykzj](https://github.com/zjykzj)
 
-## Thanks
+## ♥️Thanks
 
 * [ultralytics/ultralytics](https://github.com/ultralytics/ultralytics)
 * [zjykzj/YOLO5Face](https://github.com/zjykzj/YOLO5Face)
 * [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
 
-## Contributing
+## 🌞Contributing
 
 Anyone's participation is welcome! Open an [issue](https://github.com/zjykzj/YOLO11Face/issues) or submit PRs.
 
-## License
+## ✒️License
 
 [Apache License 2.0](LICENSE) © 2025 zjykzj
