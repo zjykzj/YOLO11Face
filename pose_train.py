@@ -7,10 +7,10 @@
 @Description:
 
 Usage - training using YOLOv8-pose / YOLO11-pose:
-    $ python3 pose_train.py --model yolov8n-pose.pt
+    $ python3 pose_train.py --model yolov8n-pose.pt --data ./yolo11face/cfg/datasets/widerface-landmarks.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
                                     yolov8s-pose.pt
                                     yolo11n-pose.pt
-                                    yolo11s-pose.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
+                                    yolo11s-pose.pt
 
 """
 

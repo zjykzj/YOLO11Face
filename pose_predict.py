@@ -7,10 +7,10 @@
 @Description:
 
 Usage - predict using YOLOv8-pose / YOLO11-pose:
-    $ python3 pose_predict.py --model yolov8n-pose_widerface.pt
+    $ python3 pose_predict.py --model yolov8n-pose_widerface.pt --source ./yolo11face/assets/widerface_val/ --imgsz 640 --device 0
                                       yolov8s-pose_widerface.pt
                                       yolo11n-pose_widerface.pt
-                                      yolo11s-pose_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
+                                      yolo11s-pose_widerface.pt
 
 """
 

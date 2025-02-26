@@ -7,12 +7,10 @@
 @Description:
 
 Usage - eval using YOLOv8-pose / YOLO11-pose:
-    $ python3 pose_eval.py --model yolov8n-pose_widerface.pt
+    $ python3 pose_eval.py --model yolov8n-pose_widerface.pt --data ./yolo11face/cfg/datasets/widerface-landmarks.yaml --imgsz 640 --device 0
                                    yolov8s-pose_widerface.pt
                                    yolo11n-pose_widerface.pt
-                                   yolo11s-pose_widerface.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --imgsz 640
-                                                                                                                              800 --device 0
-
+                                   yolo11s-pose_widerface.pt
 
 """
 
