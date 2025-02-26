@@ -24,7 +24,7 @@ ultralytics.settings = settings
 import argparse
 
 # 预定义的ASSETS路径
-ASSETS = "./yolo11face/assets"
+# ASSETS = "./yolo11face/assets"
 
 
 def parse_device(device_str):
@@ -57,17 +57,18 @@ def parse_args(folder_pict=False):
 
     # 添加参数
     parser.add_argument('--model', type=str, default=None,
-                        help='Path to the model file (default: yolo11n.pt)')
+                        help='Path to the model file')
     parser.add_argument('--data', type=str, default=None,
                         help='Path to the data configuration')
+    parser.add_argument('--source', type=str, default=None,
+                        help=f'Path to the source directory or file for prediction')
+
     parser.add_argument('--device', type=parse_device, default="cpu",
                         help='Device ID for CUDA execution, cpu for CPU (default: cpu)')
 
-    parser.add_argument('--source', type=str, default=None,
-                        help=f'Path to the source directory or file for prediction (default: {ASSETS})')
-
     if folder_pict:
-        parser.add_argument('--folder_pict', default=None, type=str, help='folder_pict')
+        parser.add_argument('--folder_pict', type=str, default=None,
+                            help='folder_pict')
 
     # 解析已知和未知的参数
     args, unknown = parser.parse_known_args()
