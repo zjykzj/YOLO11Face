@@ -7,12 +7,10 @@
 @Description:
 
 Usage - training using YOLOv5/YOLOv1/YOLO11:
-    $ python3 detect_train.py --model yolov5nu.pt
+    $ python3 detect_train.py --model yolov5nu.pt --data ./yolo11face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
                                       yolov5su.pt
-                                      yolov8n.pt
                                       yolov8s.pt
-                                      yolo11n.pt
-                                      yolo11s.pt --data ./yolo11face/cfg/datasets/widerface.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
+                                      yolo11s.pt
 
 """
 
