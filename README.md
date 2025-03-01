@@ -15,34 +15,29 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-This warehouse has attempted to train two model architectures in total. The first one is to train and validate the WIDERFACE dataset using only the `yolov5/yolov8/yolo11` detection model architecture.
+This warehouse has attempted to train two model architectures in total. The first one is to train and validate the `WIDERFACE` dataset using only the `yolov5/yolov8/yolo11` detection model architecture.
 
-|                      |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
-|:--------------------:|:------------:|:------:|:-----:|:------:|:-----:|
-| **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  | 94.84 | 93.28  | 84.67 |
-| **zjykzj/YOLO5Face** | yolov5n-v7.0 |  4.2   | 93.25 | 91.11  | 80.33 |
-|                      |              |        |       |        |       |
-| **zjykzj/YOLO11Face** |   yolov5su   |  23.8  | 95.18 | 93.50  | 82.47 |
-| **zjykzj/YOLO11Face** | yolov8s |  29.4  | 95.07 | 93.77  | 82.84 |
-| **zjykzj/YOLO11Face** | yolo11s |  8.3   | 94.07 | 92.04  | 78.88 |
+|                       |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
+|:---------------------:|:------------:|:------:|:-----:|:------:|:-----:|
+| **zjykzj/YOLO11Face** |   yolov5nu   |  7.1   | 93.86 | 91.70  | 80.37 |
+| **zjykzj/YOLO11Face** |   yolov5su   |  23.8  | 95.13 | 93.47  | 84.33 |
+| **zjykzj/YOLO11Face** |   yolov8s    |  28.4  | 95.77 | 94.18  | 84.54 |
+| **zjykzj/YOLO11Face** |   yolo11s    |  21.3  | 95.55 | 93.91  | 84.85 |
 
 The second method uses `Ultralytics' pose model` for joint training of faces and keypoints, and finally evaluates only the facial performance of the validation set in the original way.
 
-Note that the facial keypoint annotation here comes from RetinaFace, which only annotated facial keypoints on the original training set. Therefore, when training the pose model, the training part of the original WIDERFACE dataset is divided into training/validation datasets in an 8:2 ratio, and the val dataset is evaluated after training is completed.
+*Note that the facial keypoint annotation here comes from RetinaFace, which only annotated facial keypoints on the original training set. Therefore, when training the pose model, the training part of the original WIDERFACE `train` dataset is divided into `training/validation` datasets in an `8:2` ratio, and the `val` dataset is evaluated after training is completed.*
 
-|                      |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
-|:--------------------:|:------------:|:------:|:-----:|:------:|:-----:|
-| **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  | 94.84 | 93.28  | 84.67 |
-| **zjykzj/YOLO5Face** | yolov5n-v7.0 |  4.2   | 93.25 | 91.11  | 80.33 |
-|                      |              |        |       |        |       |
-| **zjykzj/YOLO8Face** |   yolov5su   |  23.8  | 95.18 | 93.50  | 82.47 |
-| **zjykzj/YOLO8Face** |   yolov5nu   |  7.1   | 93.96 | 91.82  | 78.89 |
-|                      |              |        |       |        |       |
-| **zjykzj/YOLO8Face** |   yolov8s    |  28.4  | 95.81 | 94.26  | 82.75 |
-| **zjykzj/YOLO8Face** |   yolov8n    |  8.1   | 94.57 | 92.55  | 78.97 |
-|                      |              |        |       |        |       |
-| **zjykzj/YOLO8Face** | yolov8s-pose |  29.4  | 95.07 | 93.77  | 82.84 |
-| **zjykzj/YOLO8Face** | yolov8n-pose |  8.3   | 94.07 | 92.04  | 78.88 |
+|                       |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
+|:---------------------:|:------------:|:------:|:-----:|:------:|:-----:|
+| **zjykzj/YOLO5Face**  | yolov5n-v7.0 |  4.2   | 93.25 | 91.11  | 80.33 |
+| **zjykzj/YOLO5Face**  | yolov5s-v7.0 |  15.8  | 94.84 | 93.28  | 84.67 |
+|                       |              |        |       |        |       |
+| **zjykzj/YOLO11Face** | yolov8n-pose |  8.3   | 94.61 | 92.46  | 80.98 |
+| **zjykzj/YOLO11Face** | yolov8s-pose |  29.4  | 95.50 | 93.95  | 84.65 |
+|                       |              |        |       |        |       |
+| **zjykzj/YOLO11Face**  | yolo11n-pose |  6.6   | 94.62 | 92.56  | 81.02 |
+| **zjykzj/YOLO11Face**  | yolo11s-pose |  22.3  | 95.72 | 94.19  | 85.24 |
 
 *During the eval phase, using VGA resolution input images (the longer edge of the input image is scaled to 640, and the shorter edge is scaled accordingly)*
 
