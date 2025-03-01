@@ -58,6 +58,7 @@ The second method uses `Ultralytics' pose model` for joint training of faces and
 
 ## News🚀
 
+* **2025/03/01**: Training and evaluation of WIDERFACE using the `detection and pose` model architecture of `yolov5/yolov8/yolo11`.
 * **2025/02/21**: Upgrade the baseline version of the repository to `ultralytics v8.3.75`.
 * **2025/02/15**: Trains a face and landmarks detector based on `YOLOv8-pose` and the WIDERFACE dataset.
 * **2023/02/03**: Trains a face detector based on `YOLOv8` and the WIDERFACE dataset.
