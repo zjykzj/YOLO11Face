@@ -7,7 +7,7 @@
 @Description:
 
 Usage - eval using YOLOv5/YOLOv8/YOLO11:
-    $ python3 detect_eval.py --model yolov5nu_widerface.pt --data ./yolo11face/cfg/datasets/widerface.yaml --imgsz 800 --device 0
+    $ python3 detect_eval.py --model yolov5nu_widerface.pt --data ./yolo11face/cfg/datasets/widerface.yaml --imgsz 640 --device 0
                                      yolov5su_widerface.pt
                                      yolov8s_widerface.pt
                                      yolo11s_widerface.pt
