@@ -15,7 +15,7 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-This warehouse has attempted to train two model architectures in total. The first one is to train and validate the `WIDERFACE` dataset using only the `yolov5/yolov8/yolo11` detection model architecture.
+This warehouse has attempted to train two model architectures in total. The first one is to train and validate the `WIDERFACE` dataset using only the `yolov5/yolov8/yolo11 detection model` architecture.
 
 |                       |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
 |:---------------------:|:------------:|:------:|:-----:|:------:|:-----:|
@@ -47,10 +47,10 @@ The second method uses `Ultralytics' pose model` for joint training of faces and
 - [News🚀](#news)
 - [Background🏷](#background)
 - [Installation](#installation)
-- [Usage](#usage)
-  - [Train](#train)
-  - [Eval](#eval)
-  - [Predict](#predict)
+- [Usage✨](#usage)
+  - [Train⭐](#train)
+  - [Eval⭐](#eval)
+  - [Predict⭐](#predict)
 - [Maintainers🔥](#maintainers)
 - [Thanks♥️](#thanks️)
 - [Contributing🌞](#contributing)
@@ -75,15 +75,15 @@ Note: the latest implementation of `YOLO11Face` in our warehouse is entirely bas
 
 See [INSTALL.md](./yolo8face/docs/INSTALL.md)
 
-## Usage
+## Usage✨
 
-### Train
+### Train⭐ 
 
 ```shell
 $ python3 pose_train.py --model yolo11s-pose.pt --data ./yolo11face/cfg/datasets/widerface-landmarks.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 ```
 
-### Eval
+### Eval⭐ 
 
 ```shell
 # python pose_widerface.py --model yolo11s-pose_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --imgsz 640 --conf 0.001 --iou 0.6 --max_det 1000 --batch 1 --device 7
@@ -111,7 +111,7 @@ Hard   Val AP: 0.8523522955677869
 =================================================
 ```
 
-### Predict
+### Predict⭐ 
 
 ```shell
 # python3 pose_predict.py --model yolo11s-pose_widerface.pt --source ./yolo11face/assets/widerface_val/ --imgsz 640 --device 0
