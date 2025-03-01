@@ -1,5 +1,5 @@
 
-# YOLO11Face
+# YOLO11-pose
 
 ## YOLO11s-pose
 
