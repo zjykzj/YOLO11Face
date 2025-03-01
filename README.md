@@ -15,6 +15,21 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
+This warehouse has attempted to train two model architectures in total. The first one is to train and validate the WIDERFACE dataset using only the `yolov5/yolov8/yolo11` detection model architecture.
+
+|                      |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
+|:--------------------:|:------------:|:------:|:-----:|:------:|:-----:|
+| **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  | 94.84 | 93.28  | 84.67 |
+| **zjykzj/YOLO5Face** | yolov5n-v7.0 |  4.2   | 93.25 | 91.11  | 80.33 |
+|                      |              |        |       |        |       |
+| **zjykzj/YOLO11Face** |   yolov5su   |  23.8  | 95.18 | 93.50  | 82.47 |
+| **zjykzj/YOLO11Face** | yolov8s |  29.4  | 95.07 | 93.77  | 82.84 |
+| **zjykzj/YOLO11Face** | yolo11s |  8.3   | 94.07 | 92.04  | 78.88 |
+
+The second method uses `Ultralytics' pose model` for joint training of faces and keypoints, and finally evaluates only the facial performance of the validation set in the original way.
+
+Note that the facial keypoint annotation here comes from RetinaFace, which only annotated facial keypoints on the original training set. Therefore, when training the pose model, the training part of the original WIDERFACE dataset is divided into training/validation datasets in an 8:2 ratio, and the val dataset is evaluated after training is completed.
+
 |                      |     ARCH     | GFLOPs | Easy  | Medium | Hard  |
 |:--------------------:|:------------:|:------:|:-----:|:------:|:-----:|
 | **zjykzj/YOLO5Face** | yolov5s-v7.0 |  15.8  | 94.84 | 93.28  | 84.67 |
@@ -36,6 +51,11 @@
 - [Table of Contents✨](#table-of-contents)
 - [News🚀](#news)
 - [Background🏷](#background)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Train](#train)
+  - [Eval](#eval)
+  - [Predict](#predict)
 - [Maintainers🔥](#maintainers)
 - [Thanks♥️](#thanks️)
 - [Contributing🌞](#contributing)
@@ -56,69 +76,61 @@ Through experiments, it was found that using `YOLOv8-pose/YOLO11-pose` can simul
 
 Note: the latest implementation of `YOLO11Face` in our warehouse is entirely based on [ultralytics/ultralytics v8.3.75](https://github.com/ultralytics/ultralytics/releases/tag/v8.3.75)
 
-<!-- ## Installation
+## Installation
 
 See [INSTALL.md](./yolo8face/docs/INSTALL.md)
 
-## Usage  
-
-Download the WIDERFACE dataset from http://shuoyang1213.me/WIDERFACE/, Then convert WIDERFACE dataset format.
-
-```shell
-$ python3 widerface2yolo-pose.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/retinaface_gt_v1.1/train/label.txt ../datasets/widerface-landmarks/
-```
+## Usage
 
 ### Train
 
 ```shell
-# YOLOv8n-pose / YOLOv8s-pose
-$ python3 pose_train.py --model yolov8n-pose.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --epochs 100 --imgsz 640 --device 0
-$ python3 pose_train.py --model yolov8s-pose.pt --data ./yolo8face/cfg/datasets/widerface-landmarks.yaml --epochs 100 --imgsz 640 --device 0
+$ python3 pose_train.py --model yolo11s-pose.pt --data ./yolo11face/cfg/datasets/widerface-landmarks.yaml --epochs 300 --imgsz 800 --batch 8 --device 0
 ```
 
 ### Eval
 
 ```shell
-# python pose_widerface.py --model yolov8s-pose_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --conf 0.001 --iou 0.7 --max_det 300 --batch 1 --device 0
-args: Namespace(data=None, device=[0], folder_pict='../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', model='yolov8s-pose_widerface.pt', source='../datasets/widerface/images/val/') - unknown: ['--save_txt', 'true', '--conf', '0.001', '--iou', '0.7', '--max_det', '300', '--batch', '1']
-{'model': 'yolov8s-pose_widerface.pt', 'data': None, 'device': [0], 'source': '../datasets/widerface/images/val/', 'folder_pict': '../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', 'save_txt': True, 'conf': 0.001, 'iou': 0.7, 'max_det': 300, 'batch': 1, 'mode': 'predict'}
+# python pose_widerface.py --model yolo11s-pose_widerface.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --save_txt true --imgsz 640 --conf 0.001 --iou 0.6 --max_det 1000 --batch 1 --device 7
+args: Namespace(data=None, device=[7], folder_pict='../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', model='yolo11s-pose_widerface.pt', source='../datasets/widerface/images/val/') - unknown: ['--save_txt', 'true', '--imgsz', '640', '--conf', '0.001', '--iou', '0.6', '--max_det', '1000', '--batch', '1']
+{'model': 'yolo11s-pose_widerface.pt', 'data': None, 'device': [7], 'source': '../datasets/widerface/images/val/', 'folder_pict': '../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt', 'save_txt': True, 'imgsz': 640, 'conf': 0.001, 'iou': 0.6, 'max_det': 1000, 'batch': 1, 'mode': 'predict'}
 3226
 
-Ultralytics YOLOv8.2.103 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:0 (NVIDIA GeForce RTX 3090, 24268MiB)
-YOLOv8s-pose summary (fused): 187 layers, 11,413,344 parameters, 0 gradients, 29.4 GFLOPs
+Ultralytics 8.3.75 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:7 (NVIDIA GeForce RTX 3090, 24268MiB)
+YOLO11s-pose summary (fused): 257 layers, 9,700,560 parameters, 0 gradients, 22.3 GFLOPs
 ...
 ...
-Speed: 2.1ms preprocess, 12.9ms inference, 1.6ms postprocess per image at shape (1, 3, 640, 448)
-Results saved to /data/zj/YOLO8Face/runs/detect/predict
-0 label saved to /data/zj/YOLO8Face/runs/detect/predict/labels
+Speed: 2.0ms preprocess, 14.4ms inference, 1.4ms postprocess per image at shape (1, 3, 640, 448)
+Results saved to /data/zj/YOLO11Face/runs/detect/predict3
+0 label saved to /data/zj/YOLO11Face/runs/detect/predict3/labels
 # cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/predict/labels/ -g ./ground_truth/
-Reading Predictions : 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 116.17it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:18<00:00,  3.24it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:18<00:00,  3.24it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.21it/s]
+# python3 evaluation.py -p ../runs/detect/predict3/labels/ -g ./ground_truth/
+Reading Predictions : 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 115.26it/s]
+Processing easy: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.20it/s]
+Processing medium: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:18<00:00,  3.22it/s]
+Processing hard: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:18<00:00,  3.21it/s]
 ==================== Results ====================
-Easy   Val AP: 0.9507304597200303
-Medium Val AP: 0.9376731961249901
-Hard   Val AP: 0.8283959392916
+Easy   Val AP: 0.9572097672239526
+Medium Val AP: 0.9419027051471077
+Hard   Val AP: 0.8523522955677869
 =================================================
 ```
 
 ### Predict
 
 ```shell
-# python3 pose_predict.py --model yolov8s-pose_widerface.pt --source ./yolo8face/assets/widerface_val/ --imgsz 640 --device 0
-args: Namespace(data=None, device=[0], model='yolov8s-pose_widerface.pt', source='./yolo8face/assets/widerface_val/') - unknown: ['--imgsz', '640']
+# python3 pose_predict.py --model yolo11s-pose_widerface.pt --source ./yolo11face/assets/widerface_val/ --imgsz 640 --device 0
+args: Namespace(data=None, device=[0], model='yolo11s-pose_widerface.pt', source='./yolo11face/assets/widerface_val/') - unknown: ['--imgsz', '640']
 
-Ultralytics YOLOv8.2.103 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:0 (NVIDIA GeForce RTX 3090, 24268MiB)
-YOLOv8s-pose summary (fused): 187 layers, 11,413,344 parameters, 0 gradients, 29.4 GFLOPs
-image 1/2 /data/zj/YOLO8Face/yolo8face/assets/widerface_val/39_Ice_Skating_iceskiing_39_351.jpg: 640x640 3 faces, 10.0ms
-image 2/2 /data/zj/YOLO8Face/yolo8face/assets/widerface_val/9_Press_Conference_Press_Conference_9_632.jpg: 640x640 1 face, 10.0ms
-Speed: 3.7ms preprocess, 10.0ms inference, 1.5ms postprocess per image at shape (2, 3, 640, 640)
-Results saved to /data/zj/YOLO8Face/runs/detect/predict4
+Ultralytics 8.3.75 🚀 Python-3.8.19 torch-1.12.1+cu113 CUDA:0 (NVIDIA GeForce RTX 3090, 24268MiB)
+YOLO11s-pose summary (fused): 257 layers, 9,700,560 parameters, 0 gradients, 22.3 GFLOPs
+image 1/2 /data/zj/YOLO11Face/yolo11face/assets/widerface_val/39_Ice_Skating_iceskiing_39_351.jpg: 640x640 3 faces, 22.8ms
+image 2/2 /data/zj/YOLO11Face/yolo11face/assets/widerface_val/9_Press_Conference_Press_Conference_9_632.jpg: 640x640 1 face, 22.8ms
+Speed: 3.1ms preprocess, 22.8ms inference, 1.8ms postprocess per image at shape (2, 3, 640, 640)
+Results saved to /data/zj/YOLO11Face/runs/detect/predict10
 ```
 
-<p align="left"><img src="yolo8face/assets/predict/9_Press_Conference_Press_Conference_9_632.jpg" height="240"\>  <img src="yolo8face/assets/predict/39_Ice_Skating_iceskiing_39_351.jpg" height="240"\></p> -->
+<p align="left"><img src="yolo11face/assets/predict/9_Press_Conference_Press_Conference_9_632.jpg" height="240"\>  <img src="yolo11face/assets/predict/39_Ice_Skating_iceskiing_39_351.jpg" height="240"\></p>
 
 ## Maintainers🔥
 
