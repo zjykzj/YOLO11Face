@@ -94,7 +94,7 @@ jobs:
           fetch-depth: 0 # copy full .git directory to access full git history in Docker images
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
         with:
           image: tonistiigi/binfmt:qemu-v7.0.0-28 # pin version for JetPack 6 failing Docker build: https://github.com/ultralytics/ultralytics/pull/19216
 
